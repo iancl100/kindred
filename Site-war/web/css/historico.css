@@ -1,0 +1,92 @@
+#summonerHeader{
+    box-shadow: 1px 5px 10px black;
+    background: #171726;
+    background: linear-gradient(to bottom right, rgba(23, 23, 38, 0.75), rgba(0,0,0,0.9));
+    margin-bottom: 0px;
+}
+.nav-tabs {
+    border-bottom: 0px;
+}
+.nav-tabs > li > a {
+    margin-right: 0px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 0px;
+}
+.nav-tabs > li > a:hover {
+    border-color: #eeeeee #eeeeee #dddddd;
+}
+#painelNavbar{
+    border-radius: 0px 5px 5px 0px;
+}
+.container-fluid{
+    padding: 0;
+    margin: 0;
+}
+@media (min-width:992px){
+    #painelNavbar{
+        display: flex;
+        align-items:center;
+        width: 100%;
+    }
+    #painelNavbar > a{
+        margin:0;
+        width: 100%;
+    }
+}
+@media (max-width:992px){
+    #painelNavbar > a{
+        display: list-item;
+    }
+    #painelNavbar{
+        width: 82%;
+    }
+}
+@media (min-width: 992px) {
+    .toggle {
+        display: none;
+    }
+}
+.toggle{
+    position: relative;
+    float: right;
+    margin-right: 15px;
+    padding: 9px 10px;
+    margin-bottom: 8px;
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid rgba(150,150,150,0.1);
+    border-radius: 4px;
+}
+.toggle .icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+    background-color: white;
+}
+.toggle:hover, .toogle:active{
+    background-color: #dddddd;
+}
+.toggle .icon-bar + .icon-bar {
+    margin-top: 4px;
+}
+#painelNavbar > a {
+    margin: 0;
+    padding: 10px;
+    background: linear-gradient(to bottom right, rgba(153, 161, 191, 0.75), rgba(255,255,255,0.9));
+    border-color: linear-gradient(to bottom right, rgba(153, 161, 191, 0.75), rgba(255,255,255,0.9));
+    color:black;
+    border-right: 1px solid #171726;  
+    list-style-type: none;
+    text-decoration: none;
+}
+#painelNavbar > a:hover, #painelNavbar > a:focus {
+    background: linear-gradient(to bottom right, rgba(23, 23, 38, 0.85), rgba(0,0,0,0.9));
+    border-color:#171726;
+    color:white;
+    border-right: 1px solid rgb(153, 161, 191);  
+}
+
+
+

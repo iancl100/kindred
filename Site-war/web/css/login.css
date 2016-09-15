@@ -1,0 +1,11 @@
+#containerLogin{
+    padding-left: 20%;
+    padding-right: 20%;
+}
+#containerLogin > .jumbotron{
+    background-color: rgb(23,23,38);
+    border: none;
+    box-shadow: 1px 5px 10px black;
+    background: #171726;
+    background: linear-gradient(to bottom right, rgba(23,23,38, 0.75), rgba(0,0,0,0.9));
+}

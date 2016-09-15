@@ -1,0 +1,14 @@
+<section class="container-fluid" id="painel">
+<button type="button" class="toggle" data-toggle="collapse" data-target="#painelNavbar" area-expanded="false">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+</button>
+<section class="navbar collapse" id="painelNavbar">
+    <a href="historico.jsp">Histórico de Partidas</a>
+    <a href="partidaAtiva.jsp">Partida Ativa</a>
+    <a href="liga.jsp">Liga</a>
+    <a href="runas.jsp">Runas</a>
+    <a href="talentos.jsp">Talentos</a>
+</section>
+</section>

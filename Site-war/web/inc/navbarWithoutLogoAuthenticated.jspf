@@ -1,0 +1,12 @@
+<nav class="navbar navbar-default transparent navbar-inverse">
+    <section class="container inner">
+        <section class="navbar-right">
+            <form action="Controller" method="POST">
+                <h4>Bem vindo, <a href="account.jsp" id="linkAccount">${account.username}</a>
+                    <input type="hidden" name="command" value="Account.logout">
+                    <button class="btn btn-danger btn-sm" type="submit"><span class="glyphicon glyphicon-log-out"></span> Logout</button>
+                </h4>
+            </form>
+        </section> 
+    </section>
+</nav>

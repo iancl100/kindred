@@ -1,0 +1,114 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.br.kindred.controller.command;
+
+import com.br.kindred.model.dao.AccountDAO;
+import com.br.kindred.model.entities.Account;
+import com.br.kindred.model.entities.Accountinfo;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ *
+ * @author First Place
+ */
+public class AccountCommand implements Command {
+    AccountDAO accountDAO = lookupAccountDAOBean();
+
+
+    private HttpServletRequest request;
+    private HttpServletResponse response;
+    private String responsePage;
+
+    @Override
+    public void init(HttpServletRequest request, HttpServletResponse response) {
+        this.request = request;
+        this.response = response;
+    }
+
+    @Override
+    public void execute() {
+        String action = request.getParameter("command").split("\\.")[1];
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        Account accountTemp = null;
+        switch (action) {
+            case "login":
+                accountTemp = accountDAO.readByUsername(username);
+                if (accountTemp != null) {// Verifica se a conta existe
+                    if (password.equals(accountTemp.getPassword())) { //Verifica senha da conta
+                        request.getSession().setAttribute("account", accountTemp);
+                        responsePage = "index.jsp";
+                    } else { // Senha incorreta
+                        request.getSession().setAttribute("error", "Senha incorreta");
+                        responsePage = "error.jsp";
+                    }
+                } else { // Conta inexistente
+                    request.getSession().setAttribute("error", "Não há conta com este login, por favor registre-se!");
+                    responsePage = "register.jsp";//Na página register tem um verificador caso o usuário tente logar, porém n esteja registrado
+                }
+                break;
+            case "register":
+                accountTemp = accountDAO.readByUsername(username);
+                if (accountTemp == null) {// Username disponível
+                    String email = request.getParameter("email");
+                    accountTemp = accountDAO.readByEmail(email);
+                    if (accountTemp == null) {//Email disponível
+                        if (password.equals(request.getParameter("password2"))) {// Verificação de senhas
+                            Account account = new Account();
+                            account.setUsername(username);
+                            account.setPassword(password);
+                            Accountinfo accountinfo = new Accountinfo();
+                            accountinfo.setEmail(email);
+                            accountinfo.setAccount(account);
+                            account.setAccountinfo(accountinfo);
+                            accountDAO.create(account);
+                            request.getSession().setAttribute("account", account);
+                            responsePage = "index.jsp";
+                        } else {// Senhas não correpondem
+                            request.getSession().setAttribute("error", "Senha não correspondem");
+                            responsePage = "error.jsp";
+                        }
+                    } else {// Email indisponivel
+                        request.getSession().setAttribute("error", "E-mail indisponível");
+                        responsePage = "error.jsp";
+                    }
+                } else {
+                    request.getSession().setAttribute("error", "Usuário já existe!");
+                    responsePage = "error.jsp";
+                }
+
+                break;
+            case "logout":
+                request.getSession().invalidate();
+                responsePage=request.getContextPath();
+                break;
+        }
+    }
+
+    @Override
+    public String getResponsePage() {
+        return this.responsePage;
+    }
+
+    private AccountDAO lookupAccountDAOBean() {
+        try {
+            Context c = new InitialContext();
+            return (AccountDAO) c.lookup("java:global/Site/Site-ejb/AccountDAO!com.br.kindred.model.dao.AccountDAO");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+
+    
+    
+}
