@@ -201,8 +201,9 @@ body {
 
 }
 .summonerInput:focus{
-    background-color:#E7E7E7;
+    background-color:#d4d4d8;
     box-shadow:inset 0px 1px 3px black;
+    color:black;
     
 }
 .summonerSelect{
@@ -214,7 +215,7 @@ body {
     box-shadow:inset 0px 1px 3px black;
 }
 .summonerSelect:focus{
-    background-color:#E7E7E7;
+    background-color:#d4d4d8;
     box-shadow:inset 0px 1px 3px black;
     
 }
