@@ -38,14 +38,30 @@
                 <section class="container-fluid" style="min-height: 330px;">
                     <section class="row inner">
                         <form action="Controller" method="GET" class="form-inline">
-                            <input type="hidden" name="command" value="Summoner.buscar">
+                            <input type="hidden" name="command" value="Summoner.adicionar">
                             <p class="lead">
-                            <section class="form-group">
-                                <input id="summonerInput" type="text" placeholder="Summoner's name" name="summonerName" style="min-width: 300px" class="form-control input-lg" required/>
+                            <section class="form-group" >
+                                <select class="form-control input-lg summonerSelect">
+                                    <option>BR</option>
+                                    <option>EUNE</option>
+                                    <option>EUW</option>
+                                    <option>JP</option>
+                                    <option>KR</option>
+                                    <option>LAN</option>
+                                    <option>LAS</option>
+                                    <option>NA</option>
+                                    <option>OCE</option>
+                                    <option>RU</option>
+                                    <option>TR</option>
+                                </select>
                             </section>
-                            <button type="submit" class="btn  btn-primary btn-lg">Adicionar</button>
+                            <section class="form-group ">
+                                <input  type="text" placeholder="Summoner's name" name="summonerName" style="min-width: 300px" class="form-control input-lg summonerInput" required/>
+                            </section>
+                            <button type="submit" class="btn  btn-primary btn-lg summonerButton">Adicionar</button>
                             </p>
                         </form>
+
                     </section>
 
                 </section>

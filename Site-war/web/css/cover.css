@@ -191,3 +191,39 @@ body {
     color: rgb(153, 161, 191);
     transition-duration: 0.5s;
 }
+.summonerInput{
+    outline:none;
+    cursor:pointer;
+    border:none;
+    border-radius:0px;
+    margin-left: -3px;
+   box-shadow:inset 0px 1px 3px black;
+
+}
+.summonerInput:focus{
+    background-color:#E7E7E7;
+    box-shadow:inset 0px 1px 3px black;
+    
+}
+.summonerSelect{
+    color:black;
+    outline:none;
+    cursor:pointer;
+    border:none;
+    border-radius:0px;
+    box-shadow:inset 0px 1px 3px black;
+}
+.summonerSelect:focus{
+    background-color:#E7E7E7;
+    box-shadow:inset 0px 1px 3px black;
+    
+}
+.summonerButton{
+    outline:none;
+    cursor:pointer;
+    border:none;
+    border-radius:0px;
+    padding: 11.24px 16px;
+    margin-left:-3px;
+
+}

@@ -1,3 +1,8 @@
 /nbproject/private/
 /Site-ejb/nbproject/private/
 /Site-war/nbproject/private/
+/Site-ejb/build/
+/Site-ejb/dist/
+/Site-war/build/
+/Site-war/dist/
+/build/

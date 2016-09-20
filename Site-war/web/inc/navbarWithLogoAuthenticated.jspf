@@ -20,7 +20,7 @@
         </section>
         <section class="navbar-right inner" id="navbar">
             <form action="Controller" method="POST">
-                <h4>Bem vindo, <a href="account.jsp" id="linkAccount">${account.username}</a>
+                <h4><a href="account.jsp" id="linkAccount"><img src="img/ic_account_circle_white_24dp_2x.png"/>   ${account.username}</a>
                 <input type="hidden" name="command" value="Account.logout">
                 <button class="btn btn-danger btn-sm" type="submit"><span class="glyphicon glyphicon-log-out"></span> Logout</button>
                 </h4>

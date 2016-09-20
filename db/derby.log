@@ -1,8 +1,8 @@
-Thu Sep 15 07:48:15 BRT 2016 : Apache Derby Servidor de Rede - 10.10.2.0 - (1582446) iniciado e pronto para aceitar conexões na porta 1527 em {3}
+Tue Sep 20 07:51:30 BRT 2016 : Apache Derby Servidor de Rede - 10.10.2.0 - (1582446) iniciado e pronto para aceitar conexões na porta 1527 em {3}
 ----------------------------------------------------------------
-Thu Sep 15 07:48:16 BRT 2016:
- Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instância a816c00e-0157-2d76-0f53-ffffb05357ad
-no diretório de banco de dados D:\Site\db\kindredDB 
+Tue Sep 20 07:51:31 BRT 2016:
+ Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instância a816c00e-0157-4738-d7e5-ffff9af84363
+no diretório de banco de dados D:\kindred\db\kindredDB 
 
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_40-b26
@@ -10,9 +10,9 @@ user.dir=C:\Temp\glassfish-4.1\glassfish4\javadb
 os.name=Windows 7
 os.arch=amd64
 os.version=6.1
-derby.system.home=D:\Site\db
+derby.system.home=D:\kindred\db
 Carregador de classe do banco de dados iniciado - derby.database.classpath=''
-Thu Sep 15 07:48:18 BRT 2016 Thread[DRDAConnThread_2,5,main] (XID = 2951), (SESSIONID = 0), (DATABASE = kindredDB), (DRDAID = {1}), Cleanup action starting
+Tue Sep 20 07:51:31 BRT 2016 Thread[DRDAConnThread_2,5,main] (XID = 2952), (SESSIONID = 0), (DATABASE = kindredDB), (DRDAID = {1}), Cleanup action starting
 java.sql.SQLNonTransientConnectionException: Ocorreu uma falha de autenticação da conexão.  Motivo: Autenticação inválida..
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
@@ -62,4 +62,4 @@ java.sql.SQLException: Ocorreu uma falha de autenticação da conexão.  Motivo: Au
 	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
 ============= end nested exception, level (1) ===========
 Cleanup action completed
-Thu Sep 15 07:48:18 BRT 2016 Thread[DRDAConnThread_2,5,main] (DATABASE = kindredDB), (DRDAID = {1}), Ocorreu uma falha de autenticação da conexão.  Motivo: Autenticação inválida..
+Tue Sep 20 07:51:31 BRT 2016 Thread[DRDAConnThread_2,5,main] (DATABASE = kindredDB), (DRDAID = {1}), Ocorreu uma falha de autenticação da conexão.  Motivo: Autenticação inválida..
