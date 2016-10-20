@@ -38,6 +38,7 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            request.setCharacterEncoding("UTF-8");
             String commandstr = request.getParameter("command").split("\\.")[0];
             try {
                 Command command = (Command)Class.forName("com.br.kindred.controller.command."+commandstr+"Command").newInstance();

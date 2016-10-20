@@ -39,7 +39,7 @@
                 <section class="modal-body">
                         <input type="hidden" name="command" value="Account.login">
                         <section class="form-group">
-                            <input class="form-control input-sm" type="text" placeholder="Username" name="username" required/>
+                            <input class="form-control input-sm" type="text" placeholder="Username" name="username" required autofocus/>
                         </section>
                         <section class="form-group">
                             <input class="form-control input-sm" type="password" placeholder="Password" name="password" required/>

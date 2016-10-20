@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author First Place
  */
 public class AccountCommand implements Command {
-    AccountDAO accountDAO = lookupAccountDAOBean();
 
+    AccountDAO accountDAO = lookupAccountDAOBean();
 
     private HttpServletRequest request;
     private HttpServletResponse response;
@@ -89,7 +89,35 @@ public class AccountCommand implements Command {
                 break;
             case "logout":
                 request.getSession().invalidate();
-                responsePage=request.getContextPath();
+                responsePage = request.getContextPath();
+                break;
+            case "updatePassword":
+                long idAccount = Long.parseLong(request.getParameter("idAccount"));
+                String oldPassword = request.getParameter("oldPassword");
+                String newPassword = request.getParameter("newPassword");
+                String newPasswordConfirm = request.getParameter("newPasswordConfirm");
+
+                if (newPassword.equals(newPasswordConfirm)) {
+                    accountTemp = accountDAO.readById(idAccount);
+                    if (accountTemp.getPassword().equals(oldPassword)) {
+                        accountTemp.setPassword(newPassword);
+                        accountDAO.update(accountTemp);
+                        responsePage="account.jsp";
+                    } else {
+                        request.getSession().setAttribute("error", "Senha incorreta!");
+                        responsePage = "error.jsp";
+                    }
+                }else{
+                    request.getSession().setAttribute("error", "Senhas não correpondem!");
+                    responsePage = "error.jsp";
+                }
+                break;
+            case "delete":
+                idAccount = Long.parseLong(request.getParameter("idAccount"));
+                accountTemp = accountDAO.readById(idAccount);
+                accountDAO.delete(accountTemp);
+                request.getSession().invalidate();
+                responsePage = "index.jsp";
                 break;
         }
     }
@@ -109,6 +137,4 @@ public class AccountCommand implements Command {
         }
     }
 
-    
-    
 }

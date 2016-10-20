@@ -1,10 +1,11 @@
 <%-- 
-    Document   : partidaAtiva
+    Document   : painel
     Created on : 22/08/2016, 08:50:50
     Author     : 31535811
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="ll" uri="/WEB-INF/tlds/league.tld"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,16 +17,16 @@
         <link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/cover.css" rel="stylesheet" type="text/css"/>
         <link href="css/historico.css" rel="stylesheet" type="text/css"/>
-        <link href="css/partivaAtiva.css" rel="stylesheet" type="text/css"/>
+
     </head>
     <body>
         <c:choose>
-        <c:when test="${account == null}"> <%--User -> Objeto que representa o usuário --%>
-            <%@include  file="inc/navbarWithLogo.jspf" %>
-        </c:when>
-        <c:otherwise >
-            <%@include file="inc/navbarWithLogoAuthenticated.jspf" %>
-        </c:otherwise>
+            <c:when test="${account == null}"> <%--User -> Objeto que representa o usuário --%>
+                <%@include  file="inc/navbarWithLogo.jspf" %>
+            </c:when>
+            <c:otherwise >
+                <%@include file="inc/navbarWithLogoAuthenticated.jspf" %>
+            </c:otherwise>
         </c:choose>
         <form action="Controller" method="GET" class="form-inline">
             <input type="hidden" name="command" value="Summoner.buscar">
@@ -63,11 +64,14 @@
                 <%@include file="inc/painelNavbar.jspf" %>
                 <section class="container-fluid">
                     <section class="tab-content" style="margin:7%;">
-                        <section class="row"><h2 class="text-left">Partida Ativa</h2></section>
-                        <section class="row" id="partidaNaoAtiva">
-                            
-                        </section>
-                       
+                        <section class="row"><h2 class="text-left">Liga</h2></section>
+                            <ll:leagueLine region="${region}" summonerId="${summoner.getIdSummoner()}"/>
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#show1">1</a></li>
+                            <li><a data-toggle="tab" href="#show2">2</a></li>
+                            <li><a data-toggle="tab" href="#show3">3</a></li>
+                            <li><a data-toggle="tab" href="#show4">4</a></li>
+                        </ul>
                     </section>
                 </section>
             </section>

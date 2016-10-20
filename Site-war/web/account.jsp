@@ -61,7 +61,29 @@
                             <button type="submit" class="btn  btn-primary btn-lg summonerButton">Adicionar</button>
                             </p>
                         </form>
-
+                    </section>
+                    <section class="row inner" style="width: 40%;margin:auto;">
+                        <h2>Teste da Persistência</h2>
+                        <form action="Controller" method="post" class="jumbotron">
+                            <input type="hidden" name="command" value="Account.updatePassword">
+                            <input type="hidden" name="idAccount" value="${account.idAccount}">
+                            <section class="form-group">
+                            <input class="form-control input-sm" type="password" name="oldPassword" placeholder="Senha antiga">
+                            </section>
+                            <section class="form-group">
+                            <input class="form-control input-sm" type="password" name="newPassword" placeholder="Nova senha">
+                            </section>
+                            <section class="form-group">
+                            <input class="form-control input-sm" type="password" name="newPasswordConfirm" placeholder="Nova senha novamente">
+                            </section>
+                            <button class="btn btn-danger" btn-sm type="submit">Trocar senha</button>
+                        </form>
+                        
+                        <form action="Controller" method="post" class="form-inline">
+                            <input type="hidden" name="command" value="Account.delete">
+                            <input type="hidden" name="idAccount" value="${account.idAccount}">
+                            <button class="btn btn-danger" type="submit">Deletar Conta</button>
+                        </form>
                     </section>
 
                 </section>

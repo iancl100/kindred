@@ -36,18 +36,18 @@
                 <input type="hidden" name="command" value="Summoner.buscar">
                 <p class="lead">
                 <section class="form-group" >
-                    <select class="form-control input-lg summonerSelect">
-                        <option>BR</option>
-                        <option>EUNE</option>
-                        <option>EUW</option>
-                        <option>JP</option>
-                        <option>KR</option>
-                        <option>LAN</option>
-                        <option>LAS</option>
-                        <option>NA</option>
-                        <option>OCE</option>
-                        <option>RU</option>
-                        <option>TR</option>
+                    <select class="form-control input-lg summonerSelect" name="region">
+                        <option value="br">BR</option>
+                        <option value="kr">KR</option>
+                        <option value="na">NA</option>
+                        <option value="eune">EUNE</option>
+                        <option value="euw">EUW</option>
+                        <option value="jp">JP</option>
+                        <option value="lan">LAN</option>
+                        <option value="las">LAS</option>
+                        <option value="oce">OCE</option>
+                        <option value="ru">RU</option>
+                        <option value="tr">TR</option>
                     </select>
                 </section>
                 <section class="form-group ">

@@ -22,7 +22,7 @@ import javax.persistence.Query;
 @LocalBean
 public class SummonerDAO implements GenericDAO<Summoner>{
     
-    @PersistenceContext(unitName="kindred-ejbPU", type= PersistenceContextType.TRANSACTION)
+    @PersistenceContext(unitName="kindred-ejbPU", type= PersistenceContextType.EXTENDED)
     EntityManager em;
     
     @Override

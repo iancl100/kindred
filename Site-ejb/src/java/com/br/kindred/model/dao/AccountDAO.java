@@ -24,7 +24,7 @@ import javax.persistence.Query;
 @LocalBean
 public class AccountDAO implements GenericDAO<Account>{
     
-    @PersistenceContext(unitName="kindred-ejbPU", type= PersistenceContextType.TRANSACTION)
+    @PersistenceContext(unitName="kindred-ejbPU", type= PersistenceContextType.EXTENDED)
     EntityManager em;
     
     @Override

@@ -56,6 +56,8 @@ public class Summoner implements Serializable {
     @JoinColumn(name = "ID_ACCOUNTINFO", referencedColumnName = "ID_ACCOUNTINFO")
     @ManyToOne(optional = false)
     private Accountinfo idAccountinfo;
+    private String tier;
+    private String division;
 
     public Summoner() {
     }
@@ -70,6 +72,17 @@ public class Summoner implements Serializable {
         this.summonerlevel = summonerlevel;
         this.profileicon = profileicon;
     }
+
+    public Summoner(Long idSummoner, String summonername, int summonerlevel, long profileicon, Accountinfo idAccountinfo, String tier, String division) {
+        this.idSummoner = idSummoner;
+        this.summonername = summonername;
+        this.summonerlevel = summonerlevel;
+        this.profileicon = profileicon;
+        this.idAccountinfo = idAccountinfo;
+        this.tier = tier;
+        this.division = division;
+    }
+    
 
     public Long getIdSummoner() {
         return idSummoner;
@@ -111,6 +124,42 @@ public class Summoner implements Serializable {
         this.idAccountinfo = idAccountinfo;
     }
 
+    public String getTier() {
+        return tier;
+    }
+    public String getTierTransleted(){
+        if(tier.equalsIgnoreCase("challenger")){
+            return "Desafiante";
+        }else if(tier.equalsIgnoreCase("master")){
+            return "Mestre";
+        }else if(tier.equalsIgnoreCase("diamond")){
+            return "Diamante";
+        }else if(tier.equalsIgnoreCase("platinum")){
+            return "Platina";
+        }else if(tier.equalsIgnoreCase("gold")){
+            return "Ouro";
+        }else if(tier.equalsIgnoreCase("silver")){
+            return "Prata";
+        }else if(tier.equalsIgnoreCase("bronze")){
+            return "Bronze";
+        }else {
+            return "Unranked";
+        }
+    }
+
+    public void setTier(String tier) {
+        this.tier = tier;
+    }
+
+    public String getDivision() {
+        return division;
+    }
+
+    public void setDivision(String division) {
+        this.division = division;
+    }
+    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -133,7 +182,9 @@ public class Summoner implements Serializable {
 
     @Override
     public String toString() {
-        return "com.br.kindred.model.entities.Summoner[ idSummoner=" + idSummoner + " ]";
+        return "Summoner{" + "idSummoner=" + idSummoner + ", summonername=" + summonername + ", summonerlevel=" + summonerlevel + ", profileicon=" + profileicon + ", idAccountinfo=" + idAccountinfo + ", tier=" + tier + ", division=" + division + '}';
     }
+
+    
     
 }

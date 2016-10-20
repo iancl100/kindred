@@ -20,78 +20,102 @@
     </head>
     <body>
         <c:choose>
-        <c:when test="${account == null}"> <%--User -> Objeto que representa o usuário --%>
-            <%@include  file="inc/navbarWithLogo.jspf" %>
-        </c:when>
-        <c:otherwise >
-            <%@include file="inc/navbarWithLogoAuthenticated.jspf" %>
-        </c:otherwise>
+            <c:when test="${account == null}"> <%--User -> Objeto que representa o usuário --%>
+                <%@include  file="inc/navbarWithLogo.jspf" %>
+            </c:when>
+            <c:otherwise >
+                <%@include file="inc/navbarWithLogoAuthenticated.jspf" %>
+            </c:otherwise>
         </c:choose>
-        <section class="container-fluid">
-            <section class="container inner">
-                <section class="row inner jumbotron table-responsive" id="summonerHeader">
-                    <section class="col-sm-3" style="padding-left: 0;text-align: left;"><img src="http://ddragon.leagueoflegends.com/cdn/6.17.1/img/profileicon/1111.png" class="img-rounded"></section>
-                    <section class="col-sm-9 text-left">
-                        <h3>Leoka Mechanics</h3>
-                        <h5>Diamante IV</h5>
-                    </section>
-                </section>
-                <%@include file="inc/painelNavbar.jspf" %>
-                <section class="container-fluid">
-                    <section class="tab-content" style="margin:7%;">
-                        <section class="row"><h4 class="text-left">Partidas Recente</h4></section>
-                        <section id="show1" class="tab-pane fade in active">
-                            <section class="row bg-success" style="text-align: justify;">
-                                <section class="col-sm-2" style="padding-left:0;padding-right: 0;text-align: left;"><img  src="img/images.jpg"></section>
-                                <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor </section>
-                                <section class="col-sm-6" style="border:5px solid black;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia ex odio, a dignissim sapien</section>
-                                <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor sit amet, </section>
-                            </section> 
-                            <section class="row bg-danger" style="text-align: justify;">
-                                <section class="col-sm-2" style="padding-left:0;padding-right: 0;text-align: left;"><img src="img/images.jpg"></section>
-                                <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor </section>
-                                <section class="col-sm-6" style="border:5px solid black;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia ex odio, a dignissim sapien</section>
-                                <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor sit amet, </section>
-                            </section> 
-                            <section class="row bg-success" style="text-align: justify;">
-                                <section class="col-sm-2" style="padding-left:0;padding-right: 0;text-align: left;"><img src="img/images.jpg"></section>
-                                <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor </section>
-                                <section class="col-sm-6" style="border:5px solid black;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia ex odio, a dignissim sapien</section>
-                                <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor sit amet, </section>
-                            </section>
-                        </section>
-                        <section class="tab-pane fade" id="show2">
-                            <section class="row bg-danger" style="text-align: justify;">
-                                <section class="col-sm-2" style="padding-left:0;padding-right: 0;text-align: left;"><img  src="img/images.jpg"></section>
-                                <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor </section>
-                                <section class="col-sm-6" style="border:5px solid black;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia ex odio, a dignissim sapien</section>
-                                <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor sit amet, </section>
-                            </section> 
-                            <section class="row bg-success" style="text-align: justify;">
-                                <section class="col-sm-2" style="padding-left:0;padding-right: 0;text-align: left;"><img src="img/images.jpg"></section>
-                                <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor </section>
-                                <section class="col-sm-6" style="border:5px solid black;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia ex odio, a dignissim sapien</section>
-                                <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor sit amet, </section>
-                            </section> 
-                            <section class="row bg-danger" style="text-align: justify;">
-                                <section class="col-sm-2" style="padding-left:0;padding-right: 0;text-align: left;"><img src="img/images.jpg"></section>
-                                <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor </section>
-                                <section class="col-sm-6" style="border:5px solid black;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia ex odio, a dignissim sapien</section>
-                                <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor sit amet, </section>
-                            </section>
-                        </section>
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#show1">1</a></li>
-                            <li><a data-toggle="tab" href="#show2">2</a></li>
-                            <li><a data-toggle="tab" href="#show3">3</a></li>
-                            <li><a data-toggle="tab" href="#show4">4</a></li>
-                        </ul>
-                    </section>
+        <form action="Controller" method="GET" class="form-inline">
+            <input type="hidden" name="command" value="Summoner.buscar">
+            <p class="lead">
+            <section class="form-group" >
+                <select class="form-control input-lg summonerSelect" name="region">
+                    <option value="br">BR</option>
+                    <option value="kr">KR</option>
+                    <option value="na">NA</option>
+                    <option value="eune">EUNE</option>
+                    <option value="euw">EUW</option>
+                    <option value="jp">JP</option>
+                    <option value="lan">LAN</option>
+                    <option value="las">LAS</option>
+                    <option value="oce">OCE</option>
+                    <option value="ru">RU</option>
+                    <option value="tr">TR</option>
+                </select>
+            </section>
+            <section class="form-group ">
+                <input  type="text" placeholder="Summoner's name" name="summonerName" style="min-width: 300px" class="form-control input-lg summonerInput" required/>
+            </section>
+            <button type="submit" class="btn  btn-primary btn-lg summonerButton">Buscar</button>
+        </p>
+    </form>
+    <section class="container-fluid">
+        <section class="container inner">
+            <section class="row inner jumbotron table-responsive" id="summonerHeader">
+                <section class="col-sm-3" style="padding-left: 0;text-align: left;"><img src="http://ddragon.leagueoflegends.com/cdn/6.17.1/img/profileicon/${summoner.profileicon}.png" class="img-rounded"></section>
+                <section class="col-sm-9 text-left">
+                    <h3>${summoner.summonername}</h3>
+                    <h5>${summoner.getTierTransleted()} ${summoner.division}</h5>
                 </section>
             </section>
+            <%@include file="inc/painelNavbar.jspf" %>
+            <section class="container-fluid">
+                <section class="tab-content" style="margin:7%;">
+                    <section class="row"><h2 class="text-left">Partidas Recente</h2></section>
+                    <section id="show1" class="tab-pane fade in active">
+                        <section class="row bg-success" style="text-align: justify;">
+                            <section class="col-sm-2" style="padding-left:0;padding-right: 0;text-align: left;"><img  src="img/images.jpg"></section>
+                            <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor </section>
+                            <section class="col-sm-6" style="border:5px solid black;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia ex odio, a dignissim sapien</section>
+                            <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor sit amet, </section>
+                        </section> 
+                        <section class="row bg-danger" style="text-align: justify;">
+                            <section class="col-sm-2" style="padding-left:0;padding-right: 0;text-align: left;"><img src="img/images.jpg"></section>
+                            <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor </section>
+                            <section class="col-sm-6" style="border:5px solid black;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia ex odio, a dignissim sapien</section>
+                            <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor sit amet, </section>
+                        </section> 
+                        <section class="row bg-success" style="text-align: justify;">
+                            <section class="col-sm-2" style="padding-left:0;padding-right: 0;text-align: left;"><img src="img/images.jpg"></section>
+                            <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor </section>
+                            <section class="col-sm-6" style="border:5px solid black;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia ex odio, a dignissim sapien</section>
+                            <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor sit amet, </section>
+                        </section>
+                    </section>
+                    <section class="tab-pane fade" id="show2">
+                        <section class="row bg-danger" style="text-align: justify;">
+                            <section class="col-sm-2" style="padding-left:0;padding-right: 0;text-align: left;"><img  src="img/images.jpg"></section>
+                            <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor </section>
+                            <section class="col-sm-6" style="border:5px solid black;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia ex odio, a dignissim sapien</section>
+                            <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor sit amet, </section>
+                        </section> 
+                        <section class="row bg-success" style="text-align: justify;">
+                            <section class="col-sm-2" style="padding-left:0;padding-right: 0;text-align: left;"><img src="img/images.jpg"></section>
+                            <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor </section>
+                            <section class="col-sm-6" style="border:5px solid black;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia ex odio, a dignissim sapien</section>
+                            <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor sit amet, </section>
+                        </section> 
+                        <section class="row bg-danger" style="text-align: justify;">
+                            <section class="col-sm-2" style="padding-left:0;padding-right: 0;text-align: left;"><img src="img/images.jpg"></section>
+                            <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor </section>
+                            <section class="col-sm-6" style="border:5px solid black;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia ex odio, a dignissim sapien</section>
+                            <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor sit amet, </section>
+                        </section>
+                    </section>
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#show1">1</a></li>
+                        <li><a data-toggle="tab" href="#show2">2</a></li>
+                        <li><a data-toggle="tab" href="#show3">3</a></li>
+                        <li><a data-toggle="tab" href="#show4">4</a></li>
+                    </ul>
+                </section>
+            </section>
+        </section>
 
-        </section><%@include file="inc/footer.jspf" %>
-        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script src="js/bootstrap.min.js" type="text/javascript"></script>
-    </body>
+    </section><%@include file="inc/footer.jspf" %>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+</body>
 </html>
