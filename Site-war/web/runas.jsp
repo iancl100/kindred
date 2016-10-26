@@ -5,7 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="ll" uri="/WEB-INF/tlds/league.tld"%>
+<%@taglib  prefix="r" uri="/WEB-INF/tlds/rune.tld"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,7 +17,7 @@
         <link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/cover.css" rel="stylesheet" type="text/css"/>
         <link href="css/historico.css" rel="stylesheet" type="text/css"/>
-
+        <link href="css/runas.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <c:choose>
@@ -52,26 +52,37 @@
             <button type="submit" class="btn  btn-primary btn-lg summonerButton">Buscar</button>
         </p>
     </form>
-        <section class="container-fluid">
-            <section class="container inner">
-                <section class="row inner jumbotron table-responsive" id="summonerHeader">
-                    <section class="col-sm-3" style="padding-left: 0;text-align: left;"><img src="http://ddragon.leagueoflegends.com/cdn/6.17.1/img/profileicon/${summoner.profileicon}.png" class="img-rounded"></section>
-                    <section class="col-sm-9 text-left">
-                        <h3>${summoner.summonername}</h3>
-                        <h5>${summoner.getTierTransleted()} ${summoner.division}</h5>
-                    </section>
-                </section>
-                <%@include file="inc/painelNavbar.jspf" %>
-                <section class="container-fluid">
-                    <section class="tab-content" style="margin:7%;">
-                        <section class="row"><h2 class="text-left">Liga</h2></section>
-                            <ll:leagueLine region="${region}" summonerId="${summoner.getIdSummoner()}"/>
-                    </section>
+    <section class="container-fluid">
+        <section class="container inner">
+            <section class="row inner jumbotron table-responsive" id="summonerHeader">
+                <section class="col-sm-3" style="padding-left: 0;text-align: left;"><img src="http://ddragon.leagueoflegends.com/cdn/6.17.1/img/profileicon/${summoner.profileicon}.png" class="img-rounded"></section>
+                <section class="col-sm-9 text-left">
+                    <h3>${summoner.summonername}</h3>
+                    <h5>${summoner.getTierTransleted()} ${summoner.division}</h5>
                 </section>
             </section>
+            <%@include file="inc/painelNavbar.jspf" %>
+            <section class="container-fluid">
+                <section style="margin:7%;">
+                    <section class="row"><h2 class="text-left">Páginas de Runas</h2></section>
 
-        </section><%@include file="inc/footer.jspf" %>
-        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script src="js/bootstrap.min.js" type="text/javascript"></script>
-    </body>
+                    <article class="tab-content">
+                        <r:rune pages="${summoner.pages}" summonerId="${summoner.idSummoner}"/>
+                    </article>
+
+
+
+                </section>
+            </section>
+        </section>
+
+    </section><%@include file="inc/footer.jspf" %>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+</body>
 </html>

@@ -27,7 +27,7 @@
                 <%@include file="inc/navbarWithLogoAuthenticated.jspf" %>
             </c:otherwise>
         </c:choose>
-        <form action="Controller" method="GET" class="form-inline">
+        <form action="Controller" method="POST" class="form-inline">
             <input type="hidden" name="command" value="Summoner.buscar">
             <p class="lead">
             <section class="form-group" >

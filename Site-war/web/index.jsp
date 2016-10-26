@@ -32,7 +32,7 @@
             <section class="">
                 <img src="img/logo_1.png" class="center-block img-responsive">
             </section>
-            <form action="Controller" method="GET" class="form-inline">
+            <form action="Controller" method="POST" class="form-inline">
                 <input type="hidden" name="command" value="Summoner.buscar">
                 <p class="lead">
                 <section class="form-group" >

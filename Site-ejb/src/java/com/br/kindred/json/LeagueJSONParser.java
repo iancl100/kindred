@@ -41,7 +41,7 @@ public class LeagueJSONParser {
             int leaguePoints = entry.getInt("leaguePoints"); 
             int losses = entry.getInt("losses"); 
             int wins = entry.getInt("wins");
-            long playerOrTeamId = Long.parseLong(entry.getString("playerOrTeamId"));
+            String playerOrTeamId = entry.getString("playerOrTeamId");
             String division = entry.getString("division"); 
             String playStyle = entry.getString("playstyle");
             String playerOrTeamName = entry.getString("playerOrTeamName");

@@ -45,6 +45,7 @@ public class Controller extends HttpServlet {
                 
                 command.init(request, response);
                 command.execute();
+                response.setContentType("application/json;charset=UTF-8");
                 response.sendRedirect(command.getResponsePage());
             } catch (InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
                 Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);

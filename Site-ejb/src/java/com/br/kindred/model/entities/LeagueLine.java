@@ -13,7 +13,7 @@ import java.util.Comparator;
  */
 public class LeagueLine implements Comparator<LeagueLine>{
     private Integer leaguePoints, losses,wins;
-    private long playerOrTeamId;
+    private String playerOrTeamId;
     private String division, playStyle, playerOrTeamName;
     private boolean isFreshBlood, isHotStreak, isInactive, isVeteran;
     private MiniSeries miniSerie;
@@ -21,7 +21,7 @@ public class LeagueLine implements Comparator<LeagueLine>{
     public LeagueLine() {
     }
 
-    public LeagueLine(int leaguePoints, int losses, int wins, long playerOrTeamId, String division, String playStyle, String playerOrTeamName, boolean isFreshBlood, boolean isHotStreak, boolean isInactive, boolean isVeteran) {
+    public LeagueLine(int leaguePoints, int losses, int wins, String playerOrTeamId, String division, String playStyle, String playerOrTeamName, boolean isFreshBlood, boolean isHotStreak, boolean isInactive, boolean isVeteran) {
         this.leaguePoints = leaguePoints;
         this.losses = losses;
         this.wins = wins;
@@ -37,7 +37,7 @@ public class LeagueLine implements Comparator<LeagueLine>{
     }
     
 
-    public LeagueLine(int leaguePoints, int losses, int wins, long playerOrTeamId, String division, String playStyle, String playerOrTeamName, boolean isFreshBlood, boolean isHotStreak, boolean isInactive, boolean isVeteran, MiniSeries miniSerie) {
+    public LeagueLine(int leaguePoints, int losses, int wins, String playerOrTeamId, String division, String playStyle, String playerOrTeamName, boolean isFreshBlood, boolean isHotStreak, boolean isInactive, boolean isVeteran, MiniSeries miniSerie) {
         this.leaguePoints = leaguePoints;
         this.losses = losses;
         this.wins = wins;
@@ -78,11 +78,11 @@ public class LeagueLine implements Comparator<LeagueLine>{
         this.wins = wins;
     }
 
-    public long getPlayerOrTeamId() {
+    public String getPlayerOrTeamId() {
         return playerOrTeamId;
     }
 
-    public void setPlayerOrTeamId(long playerOrTeamId) {
+    public void setPlayerOrTeamId(String playerOrTeamId) {
         this.playerOrTeamId = playerOrTeamId;
     }
 

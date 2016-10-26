@@ -6,6 +6,7 @@
 package com.br.kindred.model.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -58,6 +59,7 @@ public class Summoner implements Serializable {
     private Accountinfo idAccountinfo;
     private String tier;
     private String division;
+    private List<Page> pages;
 
     public Summoner() {
     }
@@ -73,7 +75,7 @@ public class Summoner implements Serializable {
         this.profileicon = profileicon;
     }
 
-    public Summoner(Long idSummoner, String summonername, int summonerlevel, long profileicon, Accountinfo idAccountinfo, String tier, String division) {
+    public Summoner(Long idSummoner, String summonername, int summonerlevel, long profileicon, Accountinfo idAccountinfo, String tier, String division, List<Page> pages) {
         this.idSummoner = idSummoner;
         this.summonername = summonername;
         this.summonerlevel = summonerlevel;
@@ -81,9 +83,8 @@ public class Summoner implements Serializable {
         this.idAccountinfo = idAccountinfo;
         this.tier = tier;
         this.division = division;
+        this.pages = pages;
     }
-    
-
     public Long getIdSummoner() {
         return idSummoner;
     }
@@ -143,7 +144,7 @@ public class Summoner implements Serializable {
         }else if(tier.equalsIgnoreCase("bronze")){
             return "Bronze";
         }else {
-            return "Unranked";
+            return "Level "+this.getSummonerlevel();
         }
     }
 
@@ -158,6 +159,15 @@ public class Summoner implements Serializable {
     public void setDivision(String division) {
         this.division = division;
     }
+
+    public List<Page> getPages() {
+        return pages;
+    }
+
+    public void setPages(List<Page> pages) {
+        this.pages = pages;
+    }
+    
     
 
     @Override
