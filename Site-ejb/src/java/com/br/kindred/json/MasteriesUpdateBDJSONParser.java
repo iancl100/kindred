@@ -26,77 +26,79 @@ import javax.naming.NamingException;
  * @author 31535811
  */
 public class MasteriesUpdateBDJSONParser {
+
     public static List<MasteryItem> parserFeed(String content) {
         List<MasteryItem> itens = new ArrayList<>();
-        
+
         JsonReader reader = Json.createReader(new StringReader(content));
         JsonObject root = reader.readObject();
         reader.close();
-        
-        List<Long> ids= new ArrayList<>();
+
+        List<Long> ids = new ArrayList<>();
         JsonObject trees = root.getJsonObject("tree");
-        
+
         JsonArray fero = trees.getJsonArray("Ferocity");
         for (int i = 0; i < fero.size(); i++) {
             JsonObject obj = fero.getJsonObject(i);
-            JsonArray masteryTree= obj.getJsonArray("masteryTreeItems");
+            JsonArray masteryTree = obj.getJsonArray("masteryTreeItems");
             for (int j = 0; j < masteryTree.size(); j++) {
-                if(masteryTree.get(j)!=null){
-                    System.out.println(masteryTree.getJsonObject(j));
+                try {
                     JsonObject masteryTreeObj = masteryTree.getJsonObject(j);
                     Long id = masteryTreeObj.getJsonNumber("masteryId").longValue();
                     ids.add(id);
+                } catch (Exception e) {
                 }
             }
         }
         JsonArray cunn = trees.getJsonArray("Cunning");
         for (int i = 0; i < cunn.size(); i++) {
             JsonObject obj = cunn.getJsonObject(i);
-            JsonArray masteryTree= obj.getJsonArray("masteryTreeItems");
+            JsonArray masteryTree = obj.getJsonArray("masteryTreeItems");
             for (int j = 0; j < masteryTree.size(); j++) {
-                if(masteryTree.get(j).getValueType().equals("OBJECT")){
+                try {
                     JsonObject masteryTreeObj = masteryTree.getJsonObject(j);
-                    Long id = masteryTreeObj.getJsonNumber("MasteryId").longValue();
+                    Long id = masteryTreeObj.getJsonNumber("masteryId").longValue();
                     ids.add(id);
+                } catch (Exception e) {
                 }
             }
         }
         JsonArray reso = trees.getJsonArray("Resolve");
         for (int i = 0; i < reso.size(); i++) {
             JsonObject obj = reso.getJsonObject(i);
-            JsonArray masteryTree= obj.getJsonArray("masteryTreeItems");
+            JsonArray masteryTree = obj.getJsonArray("masteryTreeItems");
             for (int j = 0; j < masteryTree.size(); j++) {
-                if(masteryTree.get(j).getValueType().equals("OBJECT")){
+                try {
                     JsonObject masteryTreeObj = masteryTree.getJsonObject(j);
-                    Long id = masteryTreeObj.getJsonNumber("MasteryId").longValue();
+                    Long id = masteryTreeObj.getJsonNumber("masteryId").longValue();
                     ids.add(id);
+                } catch (Exception e) {
                 }
             }
         }
-        
+
         JsonObject data = root.getJsonObject("data");
+
         
-        for (Long id: ids) {
-            System.out.println(id);
-        }
         for (Long id : ids) {
             JsonObject masteryItemObj = data.getJsonObject(String.valueOf(id));
             String masteryName = masteryItemObj.getString("name");
-            String masteryTree = masteryItemObj.getString("MasteryTree");
+            String masteryTree = masteryItemObj.getString("masteryTree");
             JsonArray descriptionItemJson = masteryItemObj.getJsonArray("description");
+            int rank = masteryItemObj.getInt("ranks");
             List<DescriptionItem> descriptions = new ArrayList<>();
+            MasteryItem mi = new MasteryItem(id, masteryName, masteryTree, rank);
             for (int i = 0; i < descriptionItemJson.size(); i++) {
                 String text = descriptionItemJson.getString(i);
-                descriptions.add(new DescriptionItem(text));
+                DescriptionItem di = new DescriptionItem(text);
+                di.setFkMasteryitem(mi);
+                descriptions.add(di);
             }
-            MasteryItem mi = new MasteryItem(id, masteryName, masteryTree);
-            mi.setDescriptionItemList(descriptions);
+            mi.setDescriptionitemList(descriptions);
             itens.add(mi);
         }
-        
         return itens;
-        
+
     }
-    
-    
+
 }

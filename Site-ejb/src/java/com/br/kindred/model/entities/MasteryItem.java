@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 31535811
+ * @author First Place
  */
 @Entity
 @Table(name = "MasteryItem")
@@ -32,8 +32,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "MasteryItem.findAll", query = "SELECT m FROM MasteryItem m"),
     @NamedQuery(name = "MasteryItem.findByIdMasteryid", query = "SELECT m FROM MasteryItem m WHERE m.idMasteryid = :idMasteryid"),
     @NamedQuery(name = "MasteryItem.findByMasteryname", query = "SELECT m FROM MasteryItem m WHERE m.masteryname = :masteryname"),
-    @NamedQuery(name = "MasteryItem.findByMasterytree", query = "SELECT m FROM MasteryItem m WHERE m.masterytree = :masterytree")})
+    @NamedQuery(name = "MasteryItem.findByMasterytree", query = "SELECT m FROM MasteryItem m WHERE m.masterytree = :masterytree"),
+    @NamedQuery(name = "MasteryItem.findByRank", query = "SELECT m FROM MasteryItem m WHERE m.rank = :rank")})
 public class MasteryItem implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -50,9 +52,12 @@ public class MasteryItem implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "MASTERYTREE")
     private String masterytree;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkMasteryItem")
-    private List<DescriptionItem> DescriptionItemList;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "RANK")
     private int rank;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkMasteryitem")
+    private List<DescriptionItem> descriptionitemList;
 
     public MasteryItem() {
     }
@@ -61,13 +66,12 @@ public class MasteryItem implements Serializable {
         this.idMasteryid = idMasteryid;
     }
 
-    public MasteryItem(Long idMasteryid, String masteryname, String masterytree) {
+    public MasteryItem(Long idMasteryid, String masteryname, String masterytree, int rank) {
         this.idMasteryid = idMasteryid;
         this.masteryname = masteryname;
         this.masterytree = masterytree;
-        this.rank=1;
+        this.rank = rank;
     }
-    
 
     public Long getIdMasteryid() {
         return idMasteryid;
@@ -93,15 +97,6 @@ public class MasteryItem implements Serializable {
         this.masterytree = masterytree;
     }
 
-    @XmlTransient
-    public List<DescriptionItem> getDescriptionItemList() {
-        return DescriptionItemList;
-    }
-
-    public void setDescriptionItemList(List<DescriptionItem> DescriptionItemList) {
-        this.DescriptionItemList = DescriptionItemList;
-    }
-
     public int getRank() {
         return rank;
     }
@@ -109,7 +104,15 @@ public class MasteryItem implements Serializable {
     public void setRank(int rank) {
         this.rank = rank;
     }
-    
+
+    @XmlTransient
+    public List<DescriptionItem> getDescriptionitemList() {
+        return descriptionitemList;
+    }
+
+    public void setDescriptionitemList(List<DescriptionItem> descriptionitemList) {
+        this.descriptionitemList = descriptionitemList;
+    }
 
     @Override
     public int hashCode() {
@@ -133,7 +136,9 @@ public class MasteryItem implements Serializable {
 
     @Override
     public String toString() {
-        return "com.br.kindred.model.entities.MasteryItem[ idMasteryid=" + idMasteryid + " ]";
+        return "MasteryItem{" + "idMasteryid=" + idMasteryid + ", masteryname=" + masteryname + ", masterytree=" + masterytree + ", rank=" + rank + ", descriptionitemList=" + descriptionitemList + '}';
     }
+
+    
     
 }

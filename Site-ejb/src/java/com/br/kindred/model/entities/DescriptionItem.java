@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 31535811
+ * @author First Place
  */
 @Entity
 @Table(name = "DescriptionItem")
@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "DescriptionItem.findByIdDescriptionItem", query = "SELECT d FROM DescriptionItem d WHERE d.idDescriptionItem = :idDescriptionItem"),
     @NamedQuery(name = "DescriptionItem.findByText", query = "SELECT d FROM DescriptionItem d WHERE d.text = :text")})
 public class DescriptionItem implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,9 +45,9 @@ public class DescriptionItem implements Serializable {
     @Size(min = 1, max = 400)
     @Column(name = "TEXT")
     private String text;
-    @JoinColumn(name = "FK_MasteryItem", referencedColumnName = "ID_MASTERYID")
+    @JoinColumn(name = "FK_MASTERYITEM", referencedColumnName = "ID_MASTERYID")
     @ManyToOne(optional = false)
-    private MasteryItem fkMasteryItem;
+    private MasteryItem fkMasteryitem;
 
     public DescriptionItem() {
     }
@@ -55,7 +56,7 @@ public class DescriptionItem implements Serializable {
         this.idDescriptionItem = idDescriptionItem;
     }
 
-    public DescriptionItem( String text) {
+    public DescriptionItem(String text) {
         this.text = text;
     }
 
@@ -75,13 +76,14 @@ public class DescriptionItem implements Serializable {
         this.text = text;
     }
 
-    public MasteryItem getFkMasteryItem() {
-        return fkMasteryItem;
+    public MasteryItem getFkMasteryitem() {
+        return fkMasteryitem;
     }
 
-    public void setFkMasteryItem(MasteryItem fkMasteryItem) {
-        this.fkMasteryItem = fkMasteryItem;
+    public void setFkMasteryitem(MasteryItem fkMasteryitem) {
+        this.fkMasteryitem = fkMasteryitem;
     }
+    
 
     @Override
     public int hashCode() {

@@ -1,7 +1,7 @@
-Thu Nov 03 14:13:01 BRST 2016 : Apache Derby Servidor de Rede - 10.10.2.0 - (1582446) iniciado e pronto para aceitar conexões na porta 1527 em {3}
+Sat Nov 05 19:36:06 BRST 2016 : Apache Derby Servidor de Rede - 10.10.2.0 - (1582446) iniciado e pronto para aceitar conexões na porta 1527 em {3}
 ----------------------------------------------------------------
-Thu Nov 03 14:13:02 BRST 2016:
- Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instância a816c00e-0158-2af7-05b4-ffff897b49e4
+Sat Nov 05 19:36:35 BRST 2016:
+ Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instância a816c00e-0158-366b-8543-ffff897b49e4
 no diretório de banco de dados E:\kindred\db\kindredDB 
 
 java.vendor=Oracle Corporation
@@ -12,5 +12,3 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=E:\kindred\db
 Carregador de classe do banco de dados iniciado - derby.database.classpath=''
-----------------------------------------------------------------
-Thu Nov 03 16:27:07 BRST 2016: Shutting down Derby engine
