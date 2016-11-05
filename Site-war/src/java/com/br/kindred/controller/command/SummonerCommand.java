@@ -54,7 +54,6 @@ public class SummonerCommand implements Command {
 
                 String uriLeague = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v2.5/league/by-summoner/" + summoner.getIdSummoner() + "/entry?";
                 String contentLeague = OpenStream.openURL(uriLeague);
-                System.out.println(contentLeague);
                 if (this.errorTreatment(contentLeague)){
                     summoner.setTier("UNRANKED");
                     summoner.setDivision("");
@@ -76,7 +75,8 @@ public class SummonerCommand implements Command {
                 if (this.errorTreatment(contentRunes))break;
                 
                 summoner.setPages(PagesJSONParser.parserFeed(contentRunes, String.valueOf(summoner.getIdSummoner())));
-
+                
+                
                 request.getSession().setAttribute("summoner", summoner);
                 request.getSession().setAttribute("region", region);
                 responsePage = "historico.jsp";

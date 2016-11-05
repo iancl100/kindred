@@ -74,9 +74,7 @@ public class RuneJSONParser {
         valueStringAux2[1] = valueStringAux2[1].replace("}", "");
         
         String[] v = {valueStringAux[0], valueStringAux[1], valueStringAux2[0], valueStringAux2[1]};
-        for (String v1 : v) {
-            System.out.println(v1);
-        }
+        
         
         return v;
     }

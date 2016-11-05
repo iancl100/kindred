@@ -14,20 +14,19 @@ import java.util.Comparator;
 public class LeagueLine implements Comparator<LeagueLine>{
     private Integer leaguePoints, losses,wins;
     private String playerOrTeamId;
-    private String division, playStyle, playerOrTeamName;
+    private String division, playerOrTeamName;
     private boolean isFreshBlood, isHotStreak, isInactive, isVeteran;
     private MiniSeries miniSerie;
 
     public LeagueLine() {
     }
 
-    public LeagueLine(int leaguePoints, int losses, int wins, String playerOrTeamId, String division, String playStyle, String playerOrTeamName, boolean isFreshBlood, boolean isHotStreak, boolean isInactive, boolean isVeteran) {
+    public LeagueLine(int leaguePoints, int losses, int wins, String playerOrTeamId, String division, String playerOrTeamName, boolean isFreshBlood, boolean isHotStreak, boolean isInactive, boolean isVeteran) {
         this.leaguePoints = leaguePoints;
         this.losses = losses;
         this.wins = wins;
         this.playerOrTeamId = playerOrTeamId;
         this.division = division;
-        this.playStyle = playStyle;
         this.playerOrTeamName = playerOrTeamName;
         this.isFreshBlood = isFreshBlood;
         this.isHotStreak = isHotStreak;
@@ -37,13 +36,12 @@ public class LeagueLine implements Comparator<LeagueLine>{
     }
     
 
-    public LeagueLine(int leaguePoints, int losses, int wins, String playerOrTeamId, String division, String playStyle, String playerOrTeamName, boolean isFreshBlood, boolean isHotStreak, boolean isInactive, boolean isVeteran, MiniSeries miniSerie) {
+    public LeagueLine(int leaguePoints, int losses, int wins, String playerOrTeamId, String division, String playerOrTeamName, boolean isFreshBlood, boolean isHotStreak, boolean isInactive, boolean isVeteran, MiniSeries miniSerie) {
         this.leaguePoints = leaguePoints;
         this.losses = losses;
         this.wins = wins;
         this.playerOrTeamId = playerOrTeamId;
         this.division = division;
-        this.playStyle = playStyle;
         this.playerOrTeamName = playerOrTeamName;
         this.isFreshBlood = isFreshBlood;
         this.isHotStreak = isHotStreak;
@@ -92,14 +90,6 @@ public class LeagueLine implements Comparator<LeagueLine>{
 
     public void setDivision(String division) {
         this.division = division;
-    }
-
-    public String getplayStyle() {
-        return playStyle;
-    }
-
-    public void setplayStyle(String playStyle) {
-        this.playStyle = playStyle;
     }
 
     public String getPlayerOrTeamName() {
@@ -152,8 +142,10 @@ public class LeagueLine implements Comparator<LeagueLine>{
 
     @Override
     public String toString() {
-        return "LeagueLine{" + "leaguePoints=" + leaguePoints + ", losses=" + losses + ", wins=" + wins + ", playerOrTeamId=" + playerOrTeamId + ", division=" + division + ", playStyle=" + playStyle + ", playerOrTeamName=" + playerOrTeamName + ", isFreshBlood=" + isFreshBlood + ", isHotStreak=" + isHotStreak + ", isInactive=" + isInactive + ", isVeteran=" + isVeteran + ", miniSerie=" + miniSerie + '}';
+        return "LeagueLine{" + "leaguePoints=" + leaguePoints + ", losses=" + losses + ", wins=" + wins + ", playerOrTeamId=" + playerOrTeamId + ", division=" + division + ", playerOrTeamName=" + playerOrTeamName + ", isFreshBlood=" + isFreshBlood + ", isHotStreak=" + isHotStreak + ", isInactive=" + isInactive + ", isVeteran=" + isVeteran + ", miniSerie=" + miniSerie + '}';
     }
+
+    
 
     @Override
     public int compare(LeagueLine o1, LeagueLine o2) {

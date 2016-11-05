@@ -60,6 +60,7 @@ public class Summoner implements Serializable {
     private String tier;
     private String division;
     private List<Page> pages;
+    private List<Mastery> masteries;
 
     public Summoner() {
     }
@@ -85,6 +86,19 @@ public class Summoner implements Serializable {
         this.division = division;
         this.pages = pages;
     }
+
+    public Summoner(Long idSummoner, String summonername, int summonerlevel, long profileicon, Accountinfo idAccountinfo, String tier, String division, List<Page> pages, List<Mastery> masterys) {
+        this.idSummoner = idSummoner;
+        this.summonername = summonername;
+        this.summonerlevel = summonerlevel;
+        this.profileicon = profileicon;
+        this.idAccountinfo = idAccountinfo;
+        this.tier = tier;
+        this.division = division;
+        this.pages = pages;
+        this.masteries = masterys;
+    }
+    
     public Long getIdSummoner() {
         return idSummoner;
     }
@@ -167,6 +181,15 @@ public class Summoner implements Serializable {
     public void setPages(List<Page> pages) {
         this.pages = pages;
     }
+
+    public List<Mastery> getMasterys() {
+        return masteries;
+    }
+
+    public void setMasterys(List<Mastery> masterys) {
+        this.masteries = masterys;
+    }
+    
     
     
 
@@ -192,8 +215,10 @@ public class Summoner implements Serializable {
 
     @Override
     public String toString() {
-        return "Summoner{" + "idSummoner=" + idSummoner + ", summonername=" + summonername + ", summonerlevel=" + summonerlevel + ", profileicon=" + profileicon + ", idAccountinfo=" + idAccountinfo + ", tier=" + tier + ", division=" + division + '}';
+        return "Summoner{" + "idSummoner=" + idSummoner + ", summonername=" + summonername + ", summonerlevel=" + summonerlevel + ", profileicon=" + profileicon + ", idAccountinfo=" + idAccountinfo + ", tier=" + tier + ", division=" + division + ", pages=" + pages + ", masterys=" + masteries + '}';
     }
+
+    
 
     
     

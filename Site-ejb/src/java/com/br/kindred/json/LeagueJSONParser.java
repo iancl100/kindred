@@ -42,8 +42,7 @@ public class LeagueJSONParser {
             int losses = entry.getInt("losses"); 
             int wins = entry.getInt("wins");
             String playerOrTeamId = entry.getString("playerOrTeamId");
-            String division = entry.getString("division"); 
-            String playStyle = entry.getString("playstyle");
+            String division = entry.getString("division");
             String playerOrTeamName = entry.getString("playerOrTeamName");
             boolean isFreshBlood = entry.getBoolean("isFreshBlood"); 
             boolean isHotStreak = entry.getBoolean("isHotStreak");
@@ -53,7 +52,7 @@ public class LeagueJSONParser {
             
             JsonObject miniSerieObj = entry.getJsonObject("miniSeries");
             if(miniSerieObj==null){
-                leagueLine = new LeagueLine(leaguePoints, losses, wins, playerOrTeamId, division, playStyle, playerOrTeamName, isFreshBlood, isHotStreak, isInactive, isVeteran);
+                leagueLine = new LeagueLine(leaguePoints, losses, wins, playerOrTeamId, division, playerOrTeamName, isFreshBlood, isHotStreak, isInactive, isVeteran);
             }
             else{
                 int target = miniSerieObj.getInt("target");
@@ -62,7 +61,7 @@ public class LeagueJSONParser {
                 String progress = miniSerieObj.getString("progress");
                 //Verificando miniseries
                 MiniSeries miniSerie=new MiniSeries(lossesInMini, target, winsInMini, progress);
-                leagueLine = new LeagueLine(leaguePoints, losses, wins, playerOrTeamId, division, playStyle, playerOrTeamName, isFreshBlood, isHotStreak, isInactive, isVeteran, miniSerie);
+                leagueLine = new LeagueLine(leaguePoints, losses, wins, playerOrTeamId, division, playerOrTeamName, isFreshBlood, isHotStreak, isInactive, isVeteran, miniSerie);
                 
             }
             leagueLines.add(leagueLine);

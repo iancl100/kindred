@@ -16,3 +16,15 @@ create table summoner (
 );
 alter table accountinfo add foreign key (id_accountinfo) references account(id_account) on delete cascade;
 alter table summoner add foreign key (id_accountinfo) references accountinfo(id_accountinfo) on delete cascade;
+
+create table masteryItem(
+    id_masteryId bigint not null primary key,
+    masteryName varchar(50) not null,
+    masteryTree varchar(50) not null
+);
+create table descriptionItem(
+    id_descriptionItem bigint not null primary key generated always as identity(start with 1, increment by 1),
+    fk_masteryItem bigint not null,
+    text varchar(400) not null
+);
+alter table descriptionItem add foreign key (fk_masteryItem) references masteryItem(id_masteryid) on delete cascade;
