@@ -32,7 +32,7 @@ public class MasteryItemDAO implements GenericDAO<MasteryItem>{
     }
 
     @Override
-    public List<MasteryItem> read(long id) {
+    public List<MasteryItem> read() {
         Query query = em.createNamedQuery("MasteryItem.findAll");
         return (List<MasteryItem>)query.getResultList();
     }
@@ -51,6 +51,12 @@ public class MasteryItemDAO implements GenericDAO<MasteryItem>{
 //            return null;
 //        }
 //    }
+    
+    public List<MasteryItem> readByTree(String tree){
+        Query query = em.createNamedQuery("MasteryItem.findByMasterytree").setParameter("masterytree", tree);
+        return (List<MasteryItem>)query.getResultList();
+        
+    }
 
     @Override
     public void update(MasteryItem e) {

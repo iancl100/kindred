@@ -31,7 +31,7 @@ public class SummonerDAO implements GenericDAO<Summoner>{
     }
 
     @Override
-    public List<Summoner> read(long id) {
+    public List<Summoner> read() {
         Query query = em.createNamedQuery("Summoner.findAll");
         return (List<Summoner>)query.getResultList();
     }

@@ -30,8 +30,6 @@ public class Mastery {
 
     public Mastery(String name) {
         this.name = name;
-        List<MasteryLine> lines = new ArrayList<>();
-        List<MasteryItem> itens = new ArrayList<>();
         
     }
     

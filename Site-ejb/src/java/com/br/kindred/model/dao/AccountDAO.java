@@ -33,7 +33,7 @@ public class AccountDAO implements GenericDAO<Account>{
     }
 
     @Override
-    public List<Account> read(long id) {
+    public List<Account> read() {
         Query query = em.createNamedQuery("Account.findAll");
         return (List<Account>)query.getResultList();
     }

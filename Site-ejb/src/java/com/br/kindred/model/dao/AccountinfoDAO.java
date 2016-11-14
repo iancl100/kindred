@@ -31,7 +31,7 @@ public class AccountinfoDAO implements GenericDAO<Accountinfo>{
     }
 
     @Override
-    public List<Accountinfo> read(long id) {
+    public List<Accountinfo> read() {
         Query query = em.createNamedQuery("Accountinfo.findAll");
         return (List<Accountinfo>)query.getResultList();
     }

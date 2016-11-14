@@ -7,6 +7,7 @@ package com.br.kindred.model.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;

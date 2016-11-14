@@ -25,17 +25,20 @@ import java.util.logging.Logger;
 public class OpenStream {
 
     public static String openURL(String uri) {
+        
 
         String key = "api_key=RGAPI-3ac7c9a0-16e9-4437-9941-15501dc0bfaa";
         String content = "";
+        
+        
         try {
 
             URL url = new URL(uri + key);
             System.out.println(uri + key);
             //Mackenzie
 //            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("172.16.0.10", 3128));
-//
 //            HttpURLConnection con = (HttpURLConnection) url.openConnection(proxy);
+
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 

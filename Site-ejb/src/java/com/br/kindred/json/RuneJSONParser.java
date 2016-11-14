@@ -54,10 +54,17 @@ public class RuneJSONParser {
     }
 
     public static String[] getRuneVector(JsonObject obj) {
-        String[] valueString = obj.toString().split(":");
+        String[] valueString;
+        try{
+        valueString = obj.toString().split(":");
         valueString[0] = valueString[0].replace("{\"", "");
         valueString[0] = valueString[0].replace("\"", "");
         valueString[1] = valueString[1].replace("}", "");
+        }catch(Exception e){
+            valueString=new String[2];
+            valueString[0]="FlatLethalityMod";
+            valueString[1]="1.60";
+        }
 
         return valueString;
     }

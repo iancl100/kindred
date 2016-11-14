@@ -6,11 +6,15 @@
 package com.br.kindred.controller.command;
 
 import com.br.kindred.json.LeagueJSONParser;
+import com.br.kindred.json.MasteryJSONParser;
 import com.br.kindred.json.OpenStream;
 import com.br.kindred.json.PagesJSONParser;
 import com.br.kindred.json.SummonerJSONParser;
-import com.br.kindred.model.entities.League;
-import com.br.kindred.model.entities.Summoner;
+import com.br.kindred.model.dao.MasteryItemDAO;
+import com.br.kindred.model.entities.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -24,6 +28,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author 31535811
  */
 public class SummonerCommand implements Command {
+
+    MasteryItemDAO masteryItemDAO = lookupMasteryItemDAOBean();
 
     private HttpServletRequest request;
     private HttpServletResponse response;
@@ -76,7 +82,17 @@ public class SummonerCommand implements Command {
                 
                 summoner.setPages(PagesJSONParser.parserFeed(contentRunes, String.valueOf(summoner.getIdSummoner())));
                 
+                String uriMastery= "https://"+region+".api.pvp.net/api/lol/"+region+"/v1.4/summoner/"+summoner.getIdSummoner()+"/masteries?";
+                String contentMastery = OpenStream.openURL(uriMastery);
+                if(this.errorTreatment(contentMastery))break;
                 
+                summoner.setMasterys(setMasteryUp(MasteryJSONParser.parserFeed(contentMastery, String.valueOf(summoner.getIdSummoner()))));
+//                for (Mastery m  : summoner.getMasterys()) {
+//                    System.out.println(m.getName());
+//                    System.out.println(m.getFerocity());
+//                    System.out.println(m.getCunning());
+//                    System.out.println(m.getResolve());
+//                }
                 request.getSession().setAttribute("summoner", summoner);
                 request.getSession().setAttribute("region", region);
                 responsePage = "historico.jsp";
@@ -126,5 +142,50 @@ public class SummonerCommand implements Command {
         responsePage = "error.jsp";
         return true;
     }
+    public List<Mastery> setMasteryUp(Map<String, List<MasteryItem>> mapMastery){
+        List<Mastery> masteries = new ArrayList<>();
+        
+        for (Map.Entry<String, List<MasteryItem>> entry: mapMastery.entrySet()) {
+        Mastery m = new Mastery();
+        Ferocity f = new Ferocity();
+        Cunning c = new Cunning();
+        Resolve r = new Resolve();
+            m.setName(entry.getKey());
+            for (MasteryItem mi : entry.getValue()) {
+                for (MasteryItem miReal  : f.getLines()) {
+                    if(mi.getIdMasteryid()==miReal.getIdMasteryid()){
+                    System.out.println("mi = "+mi.getRank()+ "  miReal = "+miReal.getRank());
+                        miReal.setRank(mi.getRank());
+                    }
+                }
+                for (MasteryItem miReal  : c.getLines()) {
+                    if(mi.getIdMasteryid()==miReal.getIdMasteryid()){
+                        miReal.setRank(mi.getRank());
+                    }
+                }
+                for (MasteryItem miReal  : r.getLines()) {
+                    if(mi.getIdMasteryid()==miReal.getIdMasteryid()){
+                        miReal.setRank(mi.getRank());
+                    }
+                }
+            }
+            m.setFerocity(f);
+            m.setCunning(c);
+            m.setResolve(r);
+            masteries.add(m);
+        }
+        return masteries;
+    }
+
+    private MasteryItemDAO lookupMasteryItemDAOBean() {
+        try {
+            Context c = new InitialContext();
+            return (MasteryItemDAO) c.lookup("java:global/Site/Site-ejb/MasteryItemDAO!com.br.kindred.model.dao.MasteryItemDAO");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+    
 
 }
