@@ -86,13 +86,8 @@ public class SummonerCommand implements Command {
                 String contentMastery = OpenStream.openURL(uriMastery);
                 if(this.errorTreatment(contentMastery))break;
                 
-                summoner.setMasterys(setMasteryUp(MasteryJSONParser.parserFeed(contentMastery, String.valueOf(summoner.getIdSummoner()))));
-//                for (Mastery m  : summoner.getMasterys()) {
-//                    System.out.println(m.getName());
-//                    System.out.println(m.getFerocity());
-//                    System.out.println(m.getCunning());
-//                    System.out.println(m.getResolve());
-//                }
+                summoner.setMasteries(setMasteryUp(MasteryJSONParser.parserFeed(contentMastery, String.valueOf(summoner.getIdSummoner()))));
+                
                 request.getSession().setAttribute("summoner", summoner);
                 request.getSession().setAttribute("region", region);
                 responsePage = "historico.jsp";
@@ -151,19 +146,18 @@ public class SummonerCommand implements Command {
         Cunning c = new Cunning();
         Resolve r = new Resolve();
             m.setName(entry.getKey());
-            for (MasteryItem mi : entry.getValue()) {
-                for (MasteryItem miReal  : f.getLines()) {
-                    if(mi.getIdMasteryid()==miReal.getIdMasteryid()){
-                    System.out.println("mi = "+mi.getRank()+ "  miReal = "+miReal.getRank());
-                        miReal.setRank(mi.getRank());
-                    }
-                }
-                for (MasteryItem miReal  : c.getLines()) {
+            for (MasteryItem  mi: entry.getValue()) {
+                for (MasteryItem miReal : f.getLines()) {
                     if(mi.getIdMasteryid()==miReal.getIdMasteryid()){
                         miReal.setRank(mi.getRank());
                     }
                 }
-                for (MasteryItem miReal  : r.getLines()) {
+                for (MasteryItem miReal : c.getLines()) {
+                    if(mi.getIdMasteryid()==miReal.getIdMasteryid()){
+                        miReal.setRank(mi.getRank());
+                    }
+                }
+                for (MasteryItem miReal : r.getLines()) {
                     if(mi.getIdMasteryid()==miReal.getIdMasteryid()){
                         miReal.setRank(mi.getRank());
                     }

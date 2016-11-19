@@ -6,6 +6,7 @@
 package com.br.kindred.model.entities;
 
 import com.br.kindred.model.dao.MasteryItemDAO;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +21,7 @@ import javax.naming.NamingException;
 public class Ferocity {
 
     MasteryItemDAO masteryItemDAO = lookupMasteryItemDAOBean();
-    private List<MasteryItem> lines;
+    private List<MasteryItem> lines = new ArrayList<>();
 
     
 

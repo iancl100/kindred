@@ -5,7 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib  prefix="r" uri="/WEB-INF/tlds/rune.tld"%>
+<%@taglib  prefix="m" uri="/WEB-INF/tlds/mastery.tld"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,7 +17,7 @@
         <link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/cover.css" rel="stylesheet" type="text/css"/>
         <link href="css/historico.css" rel="stylesheet" type="text/css"/>
-        <link href="css/runas.css" rel="stylesheet" type="text/css"/>
+        <link href="css/talentos.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <c:choose>
@@ -67,7 +67,6 @@
                     <section class="row"><h2 class="text-left">Páginas de Talentos</h2></section>
 
                     <article class="tab-content">
-                        
                     </article>
 
 

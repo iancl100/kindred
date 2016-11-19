@@ -183,11 +183,11 @@ public class Summoner implements Serializable {
         this.pages = pages;
     }
 
-    public List<Mastery> getMasterys() {
+    public List<Mastery> getMasteries() {
         return masteries;
     }
 
-    public void setMasterys(List<Mastery> masterys) {
+    public void setMasteries(List<Mastery> masterys) {
         this.masteries = masterys;
     }
     

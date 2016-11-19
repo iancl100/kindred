@@ -7,6 +7,7 @@ package com.br.kindred.controller.command;
 
 import com.br.kindred.json.MasteriesUpdateBDJSONParser;
 import com.br.kindred.json.OpenStream;
+import com.br.kindred.model.dao.DescriptionItemDAO;
 import com.br.kindred.model.dao.MasteryItemDAO;
 import com.br.kindred.model.entities.MasteryItem;
 import java.util.List;
@@ -23,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author First Place
  */
 public class AdminCommand implements Command {
+
+    DescriptionItemDAO descriptionItemDAO = lookupDescriptionItemDAOBean();
     MasteryItemDAO masteryItemDAO = lookupMasteryItemDAOBean();
 
     
@@ -106,6 +109,16 @@ public class AdminCommand implements Command {
         try {
             Context c = new InitialContext();
             return (MasteryItemDAO) c.lookup("java:global/Site/Site-ejb/MasteryItemDAO!com.br.kindred.model.dao.MasteryItemDAO");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+
+    private DescriptionItemDAO lookupDescriptionItemDAOBean() {
+        try {
+            Context c = new InitialContext();
+            return (DescriptionItemDAO) c.lookup("java:global/Site/Site-ejb/DescriptionItemDAO!com.br.kindred.model.dao.DescriptionItemDAO");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);

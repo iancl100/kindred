@@ -12,6 +12,6 @@
     <a href="partidaAtiva.jsp">Partida Ativa</a>
     <a href="liga.jsp">Liga</a>
     <a href="runas.jsp">Runas</a>
-    <a href="talentos.jsp">Talentos</a>
+    <!--<a href="talentos.jsp">Talentos</a>-->
 </section>
 </section>

@@ -73,6 +73,15 @@ public class MasteryItem implements Serializable {
         this.rank = rank;
     }
 
+    public MasteryItem(Long idMasteryid, String masteryname, String masterytree, int rank, List<DescriptionItem> descriptionitemList) {
+        this.idMasteryid = idMasteryid;
+        this.masteryname = masteryname;
+        this.masterytree = masterytree;
+        this.rank = rank;
+        this.descriptionitemList = descriptionitemList;
+    }
+    
+
     public Long getIdMasteryid() {
         return idMasteryid;
     }

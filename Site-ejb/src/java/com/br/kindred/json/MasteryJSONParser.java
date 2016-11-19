@@ -19,7 +19,7 @@ import javax.json.*;
  */
 public class MasteryJSONParser {
     public static Map<String, List<MasteryItem>> parserFeed(String content, String idSummoner) {
-        List<MasteryItem> itens = new ArrayList<>();
+        List<MasteryItem> itens = null;
         Map<String, List<MasteryItem>> mapMastery= new HashMap<String, List<MasteryItem>>();
         
         JsonReader reader = Json.createReader(new StringReader(content));
@@ -28,7 +28,9 @@ public class MasteryJSONParser {
         JsonObject summonerPageData= root.getJsonObject(idSummoner);
         JsonArray pagesJson = summonerPageData.getJsonArray("pages");
         for (int i = 0; i < pagesJson.size(); i++) {
-            JsonArray masteryPages = pagesJson.getJsonObject(i).getJsonArray("masteries");
+            JsonObject pageJsonItem=pagesJson.getJsonObject(i);
+            JsonArray masteryPages = pageJsonItem.getJsonArray("masteries");
+            itens = new ArrayList<>();
             for (int j = 0; j < masteryPages.size(); j++) {
                 JsonObject masteryItemObj = masteryPages.getJsonObject(j);
                 long id = masteryItemObj.getJsonNumber("id").longValue();
