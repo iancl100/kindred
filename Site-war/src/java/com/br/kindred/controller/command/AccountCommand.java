@@ -72,7 +72,7 @@ public class AccountCommand implements Command {
                             account.setAccountinfo(accountinfo);
                             accountDAO.create(account);
                             request.getSession().setAttribute("account", account);
-                            responsePage = "index.jsp";
+                            responsePage = "index.jsp";//Lembrar como mandar para página em que o cliente estava
                         } else {// Senhas não correpondem
                             request.getSession().setAttribute("error", "Senha não correspondem");
                             responsePage = "error.jsp";

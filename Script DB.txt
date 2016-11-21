@@ -31,4 +31,8 @@ create table champion(
     id_champ bigint not null primary key,
     champName varchar(50) not null
 );
+create table spell(
+    spellId bigint not null primary key,
+    spellName varchar(50) not null
+);
 alter table descriptionItem add foreign key (fk_masteryItem) references masteryItem(id_masteryid) on delete cascade;

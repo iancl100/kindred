@@ -51,10 +51,6 @@ public class SummonerCommand implements Command {
 
         switch (action) {
             case "buscar":
-                if(request.getSession().getAttribute("summoner")!=null){//Evita busca desnecessária
-                    responsePage="historico.jsp";
-                    break;
-                }
                 if (summonerName.contains(" ")) {
                     summonerName = summonerName.replaceAll(" ", "%20");
                 }
@@ -88,8 +84,10 @@ public class SummonerCommand implements Command {
 //                if(this.errorTreatment(contentMastery))break;              
 //                summoner.setMasteries(setMasteryUp(MasteryJSONParser.parserFeed(contentMastery, String.valueOf(summoner.getIdSummoner()))));
                 
-                
-                summoner.setMatchList(MatchListJSONParser.parserFeed(region, String.valueOf(summoner.getIdSummoner())));
+                String uriMatchList="https://"+region+".api.pvp.net/api/lol/"+region+"/v1.3/game/by-summoner/"+summoner.getIdSummoner()+"/recent?";
+                String matchListContent=OpenStream.openURL(uriMatchList);
+                if (this.errorTreatment(matchListContent))break;
+                summoner.setMatchList(MatchListJSONParser.parserFeed(matchListContent));
                 
                 
                 request.getSession().setAttribute("summoner", summoner);

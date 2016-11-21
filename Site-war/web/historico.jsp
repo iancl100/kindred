@@ -64,28 +64,24 @@
             <section class="container-fluid">
                 <section class="tab-content" style="margin:7%;">
                     <section class="row"><h2 class="text-left">Partidas Recente</h2></section>
-                    <section id="show1" class="tab-pane fade in active">
-                        <c:forEach items="${summoner.matchList}" var="match">
+                    <c:forEach items="${summoner.matchList}" var="match" varStatus="i" begin="0" step="1">
                                 <c:if test="${match.winner==true}">
                                     <section class="row bg-success" style="text-align: justify;">
                                 </c:if>
                                 <c:if test="${match.winner==false}">
                                     <section class="row bg-danger" style="text-align: justify;">
                                 </c:if>
-                                    <section class="col-sm-2" style="padding-left:0;padding-right: 0;text-align: left;"><img  src="http://ddragon.leagueoflegends.com/cdn/6.22.1/img/champion/${match.champion.champname}.png"></section>
-                                    <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor </section>
-                                    <section class="col-sm-6" style="border:5px solid black;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia ex odio, a dignissim sapien</section>
+                                    <section class="col-sm-2" style="padding-left:0;padding-right: 0;text-align: left;">
+                                        <img  src="http://ddragon.leagueoflegends.com/cdn/6.22.1/img/champion/${match.champ.champname}.png">
+                                        <img  src="http://ddragon.leagueoflegends.com/cdn/6.22.1/img/spell/${match.getSpell1Id().spellname}.png">
+                                        <img  src="http://ddragon.leagueoflegends.com/cdn/6.22.1/img/spell/${match.getSpell2Id().spellname}.png">
+                                    </section>
+                                    <section class="col-sm-2" style="border:5px solid black;">${match.subType} </section>
+                                    <section class="col-sm-6" style="border:5px solid black;">${match.kills}/${match.deaths}/${match.assists}</section>
                                     <section class="col-sm-2" style="border:5px solid black;">Lorem ipsum dolor sit amet, </section>
                                 </section>
                                 </c:forEach>
                             </section>
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#show1">1</a></li>
-                                <li><a data-toggle="tab" href="#show2">2</a></li>
-                                <li><a data-toggle="tab" href="#show3">3</a></li>
-                                <li><a data-toggle="tab" href="#show4">4</a></li>
-                            </ul>
-                        </section>
                     </section>
                 </section>
 
