@@ -27,4 +27,8 @@ create table descriptionItem(
     fk_masteryItem bigint not null,
     text varchar(400) not null
 );
+create table champion(
+    id_champ bigint not null primary key,
+    champName varchar(50) not null
+);
 alter table descriptionItem add foreign key (fk_masteryItem) references masteryItem(id_masteryid) on delete cascade;

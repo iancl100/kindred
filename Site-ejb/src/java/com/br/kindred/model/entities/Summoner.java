@@ -62,6 +62,7 @@ public class Summoner implements Serializable {
     private String division;
     private List<Page> pages;
     private List<Mastery> masteries;
+    private List<Match> matchList;
 
     public Summoner() {
     }
@@ -190,6 +191,15 @@ public class Summoner implements Serializable {
     public void setMasteries(List<Mastery> masterys) {
         this.masteries = masterys;
     }
+
+    public List<Match> getMatchList() {
+        return matchList;
+    }
+
+    public void setMatchList(List<Match> matchList) {
+        this.matchList = matchList;
+    }
+    
     
     
     

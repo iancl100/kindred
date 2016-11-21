@@ -36,7 +36,6 @@ public class PagesJSONParser {
             long runeId = page.getJsonNumber("id").longValue();
             List<Slot> slots = new ArrayList<Slot>();
             JsonArray slotsJson = page.getJsonArray("slots");
-            System.out.println(slotsJson);
             if(slotsJson!=null){
             Rune runeAux = null;
             for (int j = 0; j < slotsJson.size(); j++) {
@@ -46,7 +45,7 @@ public class PagesJSONParser {
                 long runeIdSlot = slotJson.getJsonNumber("runeId").longValue();
                 boolean veri = true;
                 for (Rune rune : runesTemp) {
-                    if (runeIdSlot == rune.getRuneId()) {
+                    if (runeIdSlot == rune.getIdRune()) {
                         runeAux = rune;
                         veri = false;
                         break;

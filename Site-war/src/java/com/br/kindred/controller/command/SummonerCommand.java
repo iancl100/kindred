@@ -5,8 +5,10 @@
  */
 package com.br.kindred.controller.command;
 
+import com.br.kindred.json.ChampionsUpdateBDJSONParser;
 import com.br.kindred.json.LeagueJSONParser;
 import com.br.kindred.json.MasteryJSONParser;
+import com.br.kindred.json.MatchListJSONParser;
 import com.br.kindred.json.OpenStream;
 import com.br.kindred.json.PagesJSONParser;
 import com.br.kindred.json.SummonerJSONParser;
@@ -44,11 +46,15 @@ public class SummonerCommand implements Command {
     @Override
     public void execute() {
         String action = request.getParameter("command").split("\\.")[1];
+        String summonerName = request.getParameter("summonerName");
+        String region = request.getParameter("region");
 
         switch (action) {
             case "buscar":
-                String summonerName = request.getParameter("summonerName");
-                String region = request.getParameter("region");
+                if(request.getSession().getAttribute("summoner")!=null){//Evita busca desnecessária
+                    responsePage="historico.jsp";
+                    break;
+                }
                 if (summonerName.contains(" ")) {
                     summonerName = summonerName.replaceAll(" ", "%20");
                 }
@@ -57,7 +63,7 @@ public class SummonerCommand implements Command {
                 if (this.errorTreatment(contentSummoner))break;
                 
                 Summoner summoner = SummonerJSONParser.parserFeed(contentSummoner, summonerName).get(0);
-
+                
                 String uriLeague = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v2.5/league/by-summoner/" + summoner.getIdSummoner() + "/entry?";
                 String contentLeague = OpenStream.openURL(uriLeague);
                 if (this.errorTreatment(contentLeague)){
@@ -75,22 +81,31 @@ public class SummonerCommand implements Command {
                     }
                 }
                 
-
-                String uriRunes = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.4/summoner/" + summoner.getIdSummoner() + "/runes?";
-                String contentRunes = OpenStream.openURL(uriRunes);
-                if (this.errorTreatment(contentRunes))break;
                 
-                summoner.setPages(PagesJSONParser.parserFeed(contentRunes, String.valueOf(summoner.getIdSummoner())));
                 
-                String uriMastery= "https://"+region+".api.pvp.net/api/lol/"+region+"/v1.4/summoner/"+summoner.getIdSummoner()+"/masteries?";
-                String contentMastery = OpenStream.openURL(uriMastery);
-                if(this.errorTreatment(contentMastery))break;
+//                String uriMastery= "https://"+region+".api.pvp.net/api/lol/"+region+"/v1.4/summoner/"+summoner.getIdSummoner()+"/masteries?";
+//                String contentMastery = OpenStream.openURL(uriMastery);
+//                if(this.errorTreatment(contentMastery))break;              
+//                summoner.setMasteries(setMasteryUp(MasteryJSONParser.parserFeed(contentMastery, String.valueOf(summoner.getIdSummoner()))));
                 
-                summoner.setMasteries(setMasteryUp(MasteryJSONParser.parserFeed(contentMastery, String.valueOf(summoner.getIdSummoner()))));
+                
+                summoner.setMatchList(MatchListJSONParser.parserFeed(region, String.valueOf(summoner.getIdSummoner())));
+                
                 
                 request.getSession().setAttribute("summoner", summoner);
                 request.getSession().setAttribute("region", region);
                 responsePage = "historico.jsp";
+                break;
+            case "buscarRunas":
+                summoner = (Summoner)request.getSession().getAttribute("summoner");
+                region = (String)request.getSession().getAttribute("region");
+                String uriRunes = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.4/summoner/" + summoner.getIdSummoner() + "/runes?";
+                String contentRunes = OpenStream.openURL(uriRunes);
+                if (this.errorTreatment(contentRunes))break;               
+                summoner.setPages(PagesJSONParser.parserFeed(contentRunes, String.valueOf(summoner.getIdSummoner())));
+                request.getSession().setAttribute("summoner", summoner);
+                request.getSession().setAttribute("region", region);
+                responsePage = "runas.jsp";
                 break;
         }
     }
