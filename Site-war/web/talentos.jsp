@@ -67,6 +67,10 @@
                     <section class="row"><h2 class="text-left">Páginas de Talentos</h2></section>
 
                     <article class="tab-content">
+                        <form action="Controller" method="POST">
+                            <input type="hidden" name="command" value="Admin.updateSpells">
+                            <button type="submit">REFRESH</button>
+                        </form>
                     </article>
 
 

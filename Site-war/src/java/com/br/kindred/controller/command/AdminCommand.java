@@ -5,12 +5,19 @@
  */
 package com.br.kindred.controller.command;
 
+import com.br.kindred.json.ChampionsUpdateBDJSONParser;
 import com.br.kindred.json.MasteriesUpdateBDJSONParser;
 import com.br.kindred.json.OpenStream;
+import com.br.kindred.json.SpellUpdateBDJSONParser;
+import com.br.kindred.model.dao.ChampionDAO;
 import com.br.kindred.model.dao.DescriptionItemDAO;
 import com.br.kindred.model.dao.MasteryItemDAO;
+import com.br.kindred.model.dao.SpellDAO;
+import com.br.kindred.model.entities.Champion;
 import com.br.kindred.model.entities.MasteryItem;
+import com.br.kindred.model.entities.Spell;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -24,6 +31,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author First Place
  */
 public class AdminCommand implements Command {
+
+    SpellDAO spellDAO = lookupSpellDAOBean();
+
+    ChampionDAO championDAO = lookupChampionDAOBean();
 
     DescriptionItemDAO descriptionItemDAO = lookupDescriptionItemDAOBean();
     MasteryItemDAO masteryItemDAO = lookupMasteryItemDAOBean();
@@ -59,6 +70,38 @@ public class AdminCommand implements Command {
                     }
                 }
                 responsePage = "talentos.jsp";
+                break;
+            case "updateChamps":
+                String uriChamp = "https://br.api.pvp.net/api/lol/static-data/br/v1.2/champion?champData=all&";
+                String contentChamp = OpenStream.openURL(uriChamp);
+                Map<Long, String> champList = ChampionsUpdateBDJSONParser.parserFeed(contentChamp);
+                if(errorTreatment(contentChamp))break;
+                
+                for (Map.Entry<Long, String> entry: champList.entrySet()) {
+                  Champion c = new Champion(entry.getKey(), entry.getValue());
+                  try{
+                        championDAO.update(c);
+                    }catch(Exception ex){
+                        championDAO.create(c);
+                    }  
+                }
+                responsePage = "index.jsp";//Alterar quando criar página admin.jsp
+                break;
+            case "updateSpells":
+                String uriSpell = "https://br.api.pvp.net/api/lol/static-data/br/v1.2/summoner-spell?spellData=all&";
+                String contentSpell = OpenStream.openURL(uriSpell);
+                if(errorTreatment(contentSpell))break;
+                Map<Long, String> spells = SpellUpdateBDJSONParser.parserFeed(contentSpell);
+                
+                for (Map.Entry<Long, String> entry: spells.entrySet()) {
+                  Spell s = new Spell(entry.getKey(), entry.getValue());
+                  try{
+                        spellDAO.update(s);
+                    }catch(Exception ex){
+                        spellDAO.create(s);
+                    }  
+                }
+                responsePage="index.jsp";
                 break;
         }
     }
@@ -124,6 +167,29 @@ public class AdminCommand implements Command {
             throw new RuntimeException(ne);
         }
     }
+
+    private ChampionDAO lookupChampionDAOBean() {
+        try {
+            Context c = new InitialContext();
+            return (ChampionDAO) c.lookup("java:global/Site/Site-ejb/ChampionDAO!com.br.kindred.model.dao.ChampionDAO");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+
+    private SpellDAO lookupSpellDAOBean() {
+        try {
+            Context c = new InitialContext();
+            return (SpellDAO) c.lookup("java:global/Site/Site-ejb/SpellDAO!com.br.kindred.model.dao.SpellDAO");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+    
+    
+    
     
 
     

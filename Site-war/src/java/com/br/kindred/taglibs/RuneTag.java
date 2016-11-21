@@ -62,9 +62,9 @@ public class RuneTag extends SimpleTagSupport {
                 for (int j = 1; j <= page.getSlots().size(); j++) {
                     Slot slot = page.getSlots().get(j - 1);
                     if (slot.getRuneSlotId() < 28) {
-                        out.println("<img data-toggle='tooltip' title='" + slot.getRune().getName() + " " + slot.getRune().getDescription() + "' class='rune rune-" + slot.getRuneSlotId() + "' src='http://ddragon.leagueoflegends.com/cdn/6.21.1/img/rune/" + slot.getRune().getImage() + "'><span></span></img>");
+                        out.println("<img data-toggle='tooltip' title='" + slot.getRune().getNome() + " " + slot.getRune().getDescription() + "' class='rune rune-" + slot.getRuneSlotId() + "' src='http://ddragon.leagueoflegends.com/cdn/6.21.1/img/rune/" + slot.getRune().getImage() + "'><span></span></img>");
                     } else {
-                        out.println("<span data-toggle='tooltip' title='" + slot.getRune().getName() + "         "
+                        out.println("<span data-toggle='tooltip' title='" + slot.getRune().getNome() + "         "
                                 + "" + slot.getRune().getDescription() + "' class='rune-quint rune-" + slot.getRuneSlotId() + "'style='background: url(http://ddragon.leagueoflegends.com/cdn/6.21.1/img/rune/" + slot.getRune().getImage() + ") 50% / 90% no-repeat;' ></span>");
                     }
                 }
@@ -107,7 +107,7 @@ public class RuneTag extends SimpleTagSupport {
         out.println("<b style='color: #dd5656; margin-top:10px;'>MARKS</b><br>");
         for (int i = 1; i < runesMark.size(); i++) {
             Rune rune = runesMark.get(i);
-            if (rune.getRuneId() != runeAux.getRuneId() || i == runesMark.size() - 1) {
+            if (rune.getIdRune() != runeAux.getIdRune()|| i == runesMark.size() - 1) {
                 if (i == runesMark.size() - 1) {
                     stats += rune.getStats();
                 }
@@ -123,7 +123,7 @@ public class RuneTag extends SimpleTagSupport {
         out.println("<b style='color: ORANGE;'>SEALS</b>");
         for (int i = 1; i < runesSeals.size(); i++) {
             Rune rune = runesSeals.get(i);
-            if (rune.getRuneId() != runeAux.getRuneId() || i == runesSeals.size() - 1) {
+            if (rune.getIdRune() != runeAux.getIdRune() || i == runesSeals.size() - 1) {
                 if (i == runesSeals.size() - 1) {
                     stats += rune.getStats();
                 }
@@ -139,7 +139,7 @@ public class RuneTag extends SimpleTagSupport {
         out.println("<b style='color: #5496d3;'>GLYPHS</b>");
         for (int i = 1; i < runesGlyphs.size(); i++) {
             Rune rune = runesGlyphs.get(i);
-            if (rune.getRuneId() != runeAux.getRuneId() || i == runesGlyphs.size() - 1) {
+            if (rune.getIdRune() != runeAux.getIdRune() || i == runesGlyphs.size() - 1) {
                 if (i == runesGlyphs.size() - 1) {
                     stats += rune.getStats();
                 }
@@ -155,7 +155,7 @@ public class RuneTag extends SimpleTagSupport {
         out.println("<b style='color: #a05ce0;'>QUINTESSENCES</b>");
         for (int i = 1; i < runesQuint.size(); i++) {
             Rune rune = runesQuint.get(i);
-            if (rune.getRuneId() != runeAux.getRuneId() || i == runesQuint.size() - 1) {
+            if (rune.getIdRune() != runeAux.getIdRune() || i == runesQuint.size() - 1) {
                 if (i == runesQuint.size() - 1) {
                     stats += rune.getStats();
                 }

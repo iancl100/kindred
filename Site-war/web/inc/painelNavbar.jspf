@@ -10,8 +10,11 @@
     
     <a href="historico.jsp">Histórico de Partidas</a>
     <a href="partidaAtiva.jsp">Partida Ativa</a>
-    <a href="liga.jsp">Liga</a>
-    <a href="runas.jsp">Runas</a>
+    <a href="liga.jsp" >Liga</a>
+    <a onclick="document.getElementById('buscarRunas').submit();">Runas</a>
     <!--<a href="talentos.jsp">Talentos</a>-->
 </section>
+  <form action="Controller" method="Post" id="buscarRunas">
+        <input type="hidden" name="command" value="Summoner.buscarRunas">
+   </form>  
 </section>
