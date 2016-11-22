@@ -48,13 +48,16 @@
         <section class="container inner" id="containerLogin">
             <section class="jumbotron">
                 <h1>Login</h1>
-                <form action="Controller" method="POST">
+                <form name="MyForm" action="Controller" method="POST">
                     <input type="hidden" name="command" value="Account.login">
                     <section class="form-group">
-                        <input class="form-control input-sm" type="text" placeholder="Username" name="username" required/>
+                        <input class="form-control input-sm" type="text" value="${cookie.User.value}" placeholder="Username" name="username" required/>
                     </section>
                     <section class="form-group">
-                        <input class="form-control input-sm" type="password" placeholder="Password" name="password" required/>
+                        <input class="form-control input-sm" type="password" value="${cookie.Password.value}" placeholder="Password" name="password" required/>
+                    </section>
+                    <section class="form-group">
+                        <input class="input-xs" type="checkbox" checked="true" name="remember"/> Remember Password
                     </section>
                     <button type="submit" class="btn btn-primary btn-sm">Login</button>
                 </form>

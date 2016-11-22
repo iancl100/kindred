@@ -35,19 +35,22 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h3 class="modal-title">Login</h3>
                 </section>
-                <form action="Controller" method="POST">
-                <section class="modal-body">
+                <form name="MyForm" action="Controller" method="POST">
+                    <section class="modal-body">
                         <input type="hidden" name="command" value="Account.login">
                         <section class="form-group">
-                            <input class="form-control input-sm" type="text" placeholder="Username" name="username" required autofocus/>
+                            <input class="form-control input-sm" type="text" placeholder="Username" value="${cookie.User.value}" name="username" required autofocus/>
                         </section>
                         <section class="form-group">
-                            <input class="form-control input-sm" type="password" placeholder="Password" name="password" required/>
+                            <input class="form-control input-sm" type="password" placeholder="Password" value="${cookie.Password.value}" name="password" required/>
                         </section>
-                </section>
-                <section class="modal-footer">
-                    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-log-in"></span> Login</button>
-                </section>
+                    </section>
+                    <section class="form-group">
+                        <input class="input-xs" type="checkbox" checked="true" name="remember"/> Remember Password
+                    </section>
+                    <section class="modal-footer">
+                        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-log-in"></span> Login</button>
+                    </section>
                 </form>
             </section>
 

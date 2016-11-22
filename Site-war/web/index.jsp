@@ -27,12 +27,21 @@
                 <%@include file="inc/navbarWithoutLogoAuthenticated.jspf" %>
             </c:otherwise>
         </c:choose>
+        <c:if test="${cookie.User.value!=null}">
+            <script language="javascript" type="text/javascript">
+                function submitForm()
+                {
+                    document.forms["MyForm"].submit();
+                }
+                submitForm();
+            </script>
+        </c:if>
         <section class="container-fluid inner"></section>
         <section class="container-fluid inner">
             <section class="">
                 <img src="img/logo_1.png" class="center-block img-responsive">
             </section>
-            <form action="Controller" method="POST" class="form-inline">
+            <form action="Controller" method="GET" class="form-inline">
                 <input type="hidden" name="command" value="Summoner.buscar">
                 <p class="lead">
                 <section class="form-group" >
