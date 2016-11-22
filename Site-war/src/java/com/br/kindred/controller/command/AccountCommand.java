@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,30 +22,45 @@ import javax.servlet.http.HttpServletResponse;
  * @author First Place
  */
 public class AccountCommand implements Command {
-
+    
     AccountDAO accountDAO = lookupAccountDAOBean();
-
+    
     private HttpServletRequest request;
     private HttpServletResponse response;
     private String responsePage;
-
+    
     @Override
     public void init(HttpServletRequest request, HttpServletResponse response) {
         this.request = request;
         this.response = response;
     }
-
+    
     @Override
     public void execute() {
         String action = request.getParameter("command").split("\\.")[1];
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String rememberStr = request.getParameter("remember");
+        boolean remember;
         Account accountTemp = null;
         switch (action) {
             case "login":
+                if (rememberStr.equals("on")) {
+                    remember = true;
+                } else {
+                    remember = false;
+                }
                 accountTemp = accountDAO.readByUsername(username);
                 if (accountTemp != null) {// Verifica se a conta existe
                     if (password.equals(accountTemp.getPassword())) { //Verifica senha da conta
+                        if (remember) {
+                            Cookie userC = new Cookie("User", accountTemp.getUsername());
+                            Cookie passwordC = new Cookie("Password", accountTemp.getPassword());
+                            userC.setMaxAge(60 * 60 * 24);
+                            passwordC.setMaxAge(60 * 60 * 24);
+                            response.addCookie(userC);
+                            response.addCookie(passwordC);
+                        }
                         request.getSession().setAttribute("account", accountTemp);
                         responsePage = "index.jsp";
                     } else { // Senha incorreta
@@ -85,9 +101,16 @@ public class AccountCommand implements Command {
                     request.getSession().setAttribute("error", "Usuário já existe!");
                     responsePage = "error.jsp";
                 }
-
+                
                 break;
             case "logout":
+                Cookie[] cookies = request.getCookies();
+                for (int i = 0; i < cookies.length; i++) {
+//                    cookies[i].setValue("");
+//                    cookies[i].setPath("/");
+                    cookies[i].setMaxAge(0);
+                    response.addCookie(cookies[i]);
+                }
                 request.getSession().invalidate();
                 responsePage = request.getContextPath();
                 break;
@@ -96,18 +119,18 @@ public class AccountCommand implements Command {
                 String oldPassword = request.getParameter("oldPassword");
                 String newPassword = request.getParameter("newPassword");
                 String newPasswordConfirm = request.getParameter("newPasswordConfirm");
-
+                
                 if (newPassword.equals(newPasswordConfirm)) {
                     accountTemp = accountDAO.readById(idAccount);
                     if (accountTemp.getPassword().equals(oldPassword)) {
                         accountTemp.setPassword(newPassword);
                         accountDAO.update(accountTemp);
-                        responsePage="account.jsp";
+                        responsePage = "account.jsp";
                     } else {
                         request.getSession().setAttribute("error", "Senha incorreta!");
                         responsePage = "error.jsp";
                     }
-                }else{
+                } else {
                     request.getSession().setAttribute("error", "Senhas não correpondem!");
                     responsePage = "error.jsp";
                 }
@@ -121,12 +144,12 @@ public class AccountCommand implements Command {
                 break;
         }
     }
-
+    
     @Override
     public String getResponsePage() {
         return this.responsePage;
     }
-
+    
     private AccountDAO lookupAccountDAOBean() {
         try {
             Context c = new InitialContext();
@@ -136,5 +159,5 @@ public class AccountCommand implements Command {
             throw new RuntimeException(ne);
         }
     }
-
+    
 }
